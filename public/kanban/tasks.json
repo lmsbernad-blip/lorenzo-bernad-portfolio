@@ -2,7 +2,7 @@
   "todo": [
     {
       "id": "dc2af20b-513a-40ba-88e8-63ccc52d3747",
-      "title": "Set a Meeting with Sir Jonathan s",
+      "title": "Set a Meeting with Sir Jonathan",
       "description": "",
       "dueDate": "2026-09-07",
       "priority": "high",
@@ -101,15 +101,5 @@
     }
   ],
   "inprogress": [],
-  "done": [
-    {
-      "id": "e501c6d7-7905-4d29-9994-c7ebd4d79baf",
-      "createdDate": "2026-09-06",
-      "title": "bjkbjkbk",
-      "description": "",
-      "dueDate": "",
-      "priority": "medium",
-      "label": ""
-    }
-  ]
+  "done": []
 }
