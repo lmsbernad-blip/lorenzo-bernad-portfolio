@@ -1,5 +1,105 @@
 {
-  "todo": [],
+  "todo": [
+    {
+      "id": "dc2af20b-513a-40ba-88e8-63ccc52d3747",
+      "title": "Set a Meeting with Sir Jonathan s",
+      "description": "",
+      "dueDate": "2026-09-07",
+      "priority": "medium",
+      "label": "Infoseer Assessment",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
+      "title": "Create a Debt Tracker for my loans/credit cards",
+      "description": "",
+      "dueDate": "2026-09-06",
+      "priority": "medium",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "3bb4e7c0-1cc8-4c2a-a098-873550372e5a",
+      "title": "Meeting with Business Owners (CBPSI)",
+      "description": "",
+      "dueDate": "2026-09-10",
+      "priority": "medium",
+      "label": "Infoseer Assessment",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
+      "title": "Create a personal project using SQL for Portfolio",
+      "description": "Use this for portfolio under Resume website",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "a64c8546-42e3-435d-8db2-fe0a58d6e3e1",
+      "title": "Create a personal project using PowerBI for Portfolio",
+      "description": "",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "b9ba0b36-5faa-4f39-bade-e3ef2d18a19b",
+      "title": "Create a personal project using Python for Portfolio",
+      "description": "",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "fcb7f245-7f72-4067-a994-4881adcd9de7",
+      "title": "Create Materials for Workshop for Sir Eric (Ilocos)",
+      "description": "",
+      "dueDate": "2026-10-05",
+      "priority": "medium",
+      "label": "Workshop/Seminar",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "321f0d4f-385d-45e1-9ba9-812fda09666b",
+      "title": "Create materials for Seminar (Mindoro)",
+      "description": "",
+      "dueDate": "2026-11-16",
+      "priority": "medium",
+      "label": "Workshop/Seminar",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "2dc7db65-9b4c-4827-a00e-8458a14d48eb",
+      "title": "Check travel agency in Megamall",
+      "description": "",
+      "dueDate": "2026-09-07",
+      "priority": "medium",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "1187ca1e-b628-4c6f-9947-9b65e2ec22f5",
+      "title": "Check items in closet to sell",
+      "description": "",
+      "dueDate": "2026-09-07",
+      "priority": "medium",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "539f6865-1f75-43fd-839d-1aade93e1482",
+      "title": "Search for people that will look for clients for Infoseer",
+      "description": "",
+      "dueDate": "2026-09-07",
+      "priority": "medium",
+      "label": "Infoseer",
+      "createdDate": "2026-09-06"
+    }
+  ],
   "inprogress": [],
   "done": []
 }
