@@ -98,18 +98,17 @@
       "priority": "low",
       "label": "Infoseer",
       "createdDate": "2026-09-06"
-    }
-  ],
-  "inprogress": [
+    },
     {
-      "id": "7b47d563-9f72-4813-af28-00ae9ec6856e",
+      "id": "b79127c7-b5fa-4ab8-ab0c-ccc335ec98f4",
       "createdDate": "2026-09-06",
-      "title": "htgfdsa",
+      "title": "b",
       "description": "",
-      "dueDate": "2026-09-09",
+      "dueDate": "",
       "priority": "medium",
       "label": ""
     }
   ],
+  "inprogress": [],
   "done": []
 }
