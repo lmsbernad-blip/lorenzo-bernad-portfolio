@@ -234,29 +234,28 @@ function setStatus(text, cls){
   statusEl.className = cls || '';
 }
 
-function rawUrl(){
-  return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${GH.path}?t=${Date.now()}`;
-}
 function api(path, opts={}){
   const sep = path.includes('?') ? '&' : '?';
+  const headers = { 'Accept': 'application/vnd.github+json', ...(opts.headers||{}) };
+  if(token) headers['Authorization'] = `Bearer ${token}`;
   return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}${sep}_=${Date.now()}`, {
     ...opts,
     cache: 'no-store',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/vnd.github+json',
-      ...(opts.headers||{})
-    }
+    headers
   });
 }
 function normalizeTask(t){ if(!t.priority) t.priority = 'medium'; }
 
 /* ---- Load tasks (public, no login required to view) ---- */
+/* Uses the GitHub Contents API rather than raw.githubusercontent.com, which sits
+   behind a CDN that can serve stale content for several minutes after a save. */
 async function loadTasks(){
   try{
-    const res = await fetch(rawUrl(), { cache: 'no-store' });
+    const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
     if(!res.ok) throw new Error('HTTP ' + res.status);
-    data = await res.json();
+    const json = await res.json();
+    if(!token) sha = json.sha;
+    data = JSON.parse(decodeURIComponent(escape(atob(json.content))));
     COLS.forEach(c => { if(!Array.isArray(data[c])) data[c] = []; });
     data.todo.forEach(normalizeTask); data.inprogress.forEach(normalizeTask); data.done.forEach(normalizeTask);
     setStatus('Loaded');
