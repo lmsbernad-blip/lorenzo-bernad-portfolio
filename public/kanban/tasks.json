@@ -86,7 +86,7 @@
       "title": "Check items in closet to sell",
       "description": "",
       "dueDate": "2026-09-07",
-      "priority": "medium",
+      "priority": "low",
       "label": "Personal",
       "createdDate": "2026-09-06"
     },
