@@ -98,7 +98,9 @@
       "priority": "low",
       "label": "Infoseer",
       "createdDate": "2026-09-06"
-    },
+    }
+  ],
+  "inprogress": [
     {
       "id": "7b47d563-9f72-4813-af28-00ae9ec6856e",
       "createdDate": "2026-09-06",
@@ -109,6 +111,5 @@
       "label": ""
     }
   ],
-  "inprogress": [],
   "done": []
 }
