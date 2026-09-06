@@ -219,7 +219,8 @@
 
 <script>
 const GH = { owner: 'lmsbernad-blip', repo: 'lorenzo-bernad-portfolio', branch: 'main', path: 'public/kanban/tasks.json' };
-let token = null; // in-memory only, never persisted
+const TOKEN_KEY = 'kanban_gh_token';
+let token = null; // persisted in this browser's localStorage so you only log in once per device
 let sha = null;
 let data = { todo: [], inprogress: [], done: [] };
 const COLS = ['todo', 'inprogress', 'done'];
@@ -264,33 +265,43 @@ async function loadTasks(){
   }
 }
 
-/* ---- Login (only needed to save) ---- */
+/* ---- Login (only needed once per device — token is remembered after that) ---- */
 const loginPanel = document.getElementById('login-panel');
 document.getElementById('login-toggle').onclick = () => {
+  if(token){
+    if(confirm('Forget the saved token on this device? You will need to log in again to save.')){
+      localStorage.removeItem(TOKEN_KEY);
+      token = null; sha = null;
+      document.getElementById('login-toggle').textContent = 'Log in to save';
+      document.getElementById('login-toggle').disabled = false;
+      setStatus('Logged out');
+    }
+    return;
+  }
   loginPanel.style.display = loginPanel.style.display === 'flex' ? 'none' : 'flex';
   document.getElementById('login-err').textContent = '';
 };
 document.getElementById('login-cancel').onclick = () => { loginPanel.style.display = 'none'; };
-document.getElementById('login-btn').onclick = attemptLogin;
-document.getElementById('token-input').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
+document.getElementById('login-btn').onclick = () => attemptLogin(document.getElementById('token-input').value.trim());
+document.getElementById('token-input').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(document.getElementById('token-input').value.trim()); });
 
-async function attemptLogin(){
-  const val = document.getElementById('token-input').value.trim();
+async function attemptLogin(val, silent){
   const errEl = document.getElementById('login-err');
   errEl.textContent = '';
-  if(!val){ errEl.textContent = 'Enter a token.'; return; }
+  if(!val){ if(!silent) errEl.textContent = 'Enter a token.'; return; }
   token = val;
   try{
     const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
     if(!res.ok) throw new Error('Could not verify token (' + res.status + '). Check the token and repo permissions.');
     const json = await res.json();
     sha = json.sha;
-    document.getElementById('login-toggle').textContent = 'Logged in ✓';
-    document.getElementById('login-toggle').disabled = true;
+    localStorage.setItem(TOKEN_KEY, val);
+    document.getElementById('login-toggle').textContent = 'Logged in ✓ (tap to forget)';
     loginPanel.style.display = 'none';
     setStatus('Logged in');
   }catch(e){
     token = null;
+    if(silent){ localStorage.removeItem(TOKEN_KEY); return; }
     errEl.textContent = e.message;
   }
 }
@@ -694,7 +705,7 @@ let saveQueue = Promise.resolve();
 function save(){
   saveQueue = saveQueue.then(doSave);
 }
-async function doSave(){
+async function doSave(retrying){
   if(!token){ setStatus('Not logged in', 'err'); return; }
   setStatus('Saving…');
   try{
@@ -713,7 +724,11 @@ async function doSave(){
     });
     if(!res.ok){
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || ('Save failed (' + res.status + ')'));
+      const msg = err.message || ('Save failed (' + res.status + ')');
+      if(!retrying && (res.status === 409 || /does not match/i.test(msg))){
+        return doSave(true); // stale sha (concurrent edit) — retry once with a fresh one
+      }
+      throw new Error(msg);
     }
     const result = await res.json();
     sha = result.content.sha;
@@ -724,6 +739,8 @@ async function doSave(){
 }
 
 loadTasks();
+const savedToken = localStorage.getItem(TOKEN_KEY);
+if(savedToken) attemptLogin(savedToken, true);
 </script>
 
 </body>
