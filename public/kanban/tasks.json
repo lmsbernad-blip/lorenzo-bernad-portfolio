@@ -98,15 +98,6 @@
       "priority": "low",
       "label": "Infoseer",
       "createdDate": "2026-09-06"
-    },
-    {
-      "id": "1d75ef04-9676-49e7-963d-6b2f437e95b0",
-      "createdDate": "2026-09-06",
-      "title": "dscaxz",
-      "description": "",
-      "dueDate": "",
-      "priority": "medium",
-      "label": ""
     }
   ],
   "inprogress": [],
