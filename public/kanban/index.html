@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Tasks</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --border:#dfe1e6; --text:#172b4d; --muted:#6b778c;
+    --accent:#0052cc; --danger:#de350b; --ok:#00875a;
+    --col-head:#ebecf0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:8px;}
+  header h1{font-size:18px;margin:0;}
+  #status-area{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  #save-status{min-width:70px;}
+  #save-status.ok{color:var(--ok);}
+  #save-status.err{color:var(--danger);}
+  button{cursor:pointer;font-family:inherit;}
+  .btn{background:var(--accent);color:#fff;border:none;border-radius:5px;padding:7px 12px;font-size:13px;}
+  .btn:hover{opacity:.9;}
+  .btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:5px;padding:6px 11px;font-size:13px;}
+  .btn-text{background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;padding:0;}
+
+  #login-panel{padding:10px 18px;background:#fffae6;border-bottom:1px solid #ffe380;display:none;gap:8px;align-items:center;flex-wrap:wrap;}
+  #login-panel input{padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;min-width:220px;flex:1;}
+  #login-error{color:var(--danger);font-size:12px;width:100%;}
+
+  main{padding:16px;}
+  #board{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;}
+  .column{background:var(--col-head);border-radius:8px;flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;max-height:calc(100vh - 110px);}
+  .column-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 4px;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
+  .count{background:#dfe1e6;border-radius:10px;padding:1px 8px;font-size:12px;}
+  .card-list{flex:1;overflow-y:auto;padding:4px 10px 10px;min-height:40px;}
+  .card{background:var(--card);border-radius:6px;padding:10px 10px 8px;margin-bottom:8px;box-shadow:0 1px 2px rgba(9,30,66,.15);touch-action:none;position:relative;}
+  .card.dragging{opacity:.4;}
+  .card-title{font-size:14px;font-weight:600;margin:0 0 4px;word-break:break-word;}
+  .card-desc{font-size:12.5px;color:var(--muted);margin:0 0 6px;white-space:pre-wrap;word-break:break-word;}
+  .card-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted);}
+  .chip{border-radius:10px;padding:2px 8px;font-size:11px;background:#deebff;color:#0747a6;}
+  .due{border-radius:10px;padding:2px 8px;font-size:11px;background:#e3fcef;color:#006644;}
+  .due.overdue{background:#ffebe6;color:#bf2600;}
+  .card-actions{position:absolute;top:6px;right:6px;display:flex;gap:4px;opacity:0;transition:opacity .15s;}
+  .card:hover .card-actions, .card:focus-within .card-actions{opacity:1;}
+  .icon-btn{background:none;border:none;color:var(--muted);font-size:13px;padding:2px 4px;border-radius:3px;}
+  .icon-btn:hover{background:#ebecf0;color:var(--text);}
+  .add-task-btn{margin:4px 10px 10px;background:none;border:none;text-align:left;color:var(--muted);font-size:13px;padding:8px;border-radius:5px;}
+  .add-task-btn:hover{background:#e6e8ec;color:var(--text);}
+
+  .drop-ghost{border:2px dashed var(--accent);border-radius:6px;height:44px;margin-bottom:8px;background:rgba(0,82,204,.06);}
+
+  #modal-backdrop{display:none;position:fixed;inset:0;background:rgba(9,30,66,.5);align-items:center;justify-content:center;z-index:50;padding:16px;}
+  #modal{background:#fff;border-radius:8px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;}
+  #modal h2{margin:0 0 14px;font-size:16px;}
+  #modal label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px;}
+  #modal input[type=text], #modal input[type=date], #modal textarea{width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-family:inherit;}
+  #modal textarea{resize:vertical;min-height:60px;}
+  #modal .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+
+  @media (max-width:700px){
+    #board{scroll-snap-type:x mandatory;}
+    .column{flex:0 0 88vw;}
+    header h1{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My Tasks</h1>
+  <div id="status-area">
+    <span id="save-status">Loading…</span>
+    <button class="btn-text" id="login-toggle">Log in to save</button>
+  </div>
+</header>
+
+<div id="login-panel">
+  <input type="password" id="token-input" placeholder="GitHub Personal Access Token" autocomplete="off">
+  <button class="btn" id="login-btn">Log in</button>
+  <button class="btn-text" id="login-cancel">Cancel</button>
+  <div id="login-error"></div>
+</div>
+
+<main>
+  <div id="board">
+    <div class="column" data-col="todo">
+      <div class="column-head"><span>To Do</span><span class="count" id="count-todo">0</span></div>
+      <div class="card-list" data-col="todo"></div>
+      <button class="add-task-btn" data-add-col="todo">+ Add task</button>
+    </div>
+    <div class="column" data-col="inprogress">
+      <div class="column-head"><span>In Progress</span><span class="count" id="count-inprogress">0</span></div>
+      <div class="card-list" data-col="inprogress"></div>
+      <button class="add-task-btn" data-add-col="inprogress">+ Add task</button>
+    </div>
+    <div class="column" data-col="done">
+      <div class="column-head"><span>Done</span><span class="count" id="count-done">0</span></div>
+      <div class="card-list" data-col="done"></div>
+      <button class="add-task-btn" data-add-col="done">+ Add task</button>
+    </div>
+  </div>
+</main>
+
+<div id="modal-backdrop">
+  <div id="modal">
+    <h2 id="modal-title">Add task</h2>
+    <label>Title</label>
+    <input type="text" id="f-title" maxlength="120">
+    <label>Description (optional)</label>
+    <textarea id="f-desc" maxlength="500"></textarea>
+    <label>Due date (optional)</label>
+    <input type="date" id="f-due">
+    <label>Label (optional)</label>
+    <input type="text" id="f-label" maxlength="30" placeholder="e.g. work, urgent">
+    <div class="modal-actions">
+      <button class="btn-text" id="modal-cancel">Cancel</button>
+      <button class="btn" id="modal-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const GH = { owner: 'lmsbernad-blip', repo: 'lorenzo-bernad-portfolio', branch: 'main', path: 'public/kanban/tasks.json' };
+let token = null; // in-memory only, never persisted
+let sha = null;
+let data = { todo: [], inprogress: [], done: [] };
+const COLS = ['todo', 'inprogress', 'done'];
+
+const statusEl = document.getElementById('save-status');
+function setStatus(text, cls){
+  statusEl.textContent = text;
+  statusEl.className = cls || '';
+}
+
+function rawUrl(){
+  return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${GH.path}?t=${Date.now()}`;
+}
+function api(path, opts={}){
+  return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}`, {
+    ...opts,
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      ...(opts.headers||{})
+    }
+  });
+}
+
+async function loadTasks(){
+  try{
+    const res = await fetch(rawUrl(), { cache: 'no-store' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    data = await res.json();
+    COLS.forEach(c => { if(!Array.isArray(data[c])) data[c] = []; });
+    setStatus('Loaded');
+    render();
+  }catch(e){
+    setStatus('Error loading tasks', 'err');
+    render();
+  }
+}
+
+function fmtDate(iso){
+  if(!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString(undefined, { month:'short', day:'numeric' });
+}
+function isOverdue(iso){
+  if(!iso) return false;
+  const today = new Date(); today.setHours(0,0,0,0);
+  return new Date(iso + 'T00:00:00') < today;
+}
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function render(){
+  COLS.forEach(col => {
+    const list = document.querySelector(`.card-list[data-col="${col}"]`);
+    list.innerHTML = '';
+    data[col].forEach(task => list.appendChild(renderCard(task, col)));
+    document.getElementById('count-' + col).textContent = data[col].length;
+  });
+}
+
+function renderCard(task, col){
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.dataset.id = task.id;
+  el.dataset.col = col;
+
+  const due = task.dueDate ? `<span class="due${isOverdue(task.dueDate) ? ' overdue' : ''}">${fmtDate(task.dueDate)}</span>` : '';
+  const label = task.label ? `<span class="chip">${escapeHtml(task.label)}</span>` : '';
+
+  el.innerHTML = `
+    <div class="card-actions">
+      <button class="icon-btn" data-edit="${task.id}" title="Edit">✎</button>
+      <button class="icon-btn" data-delete="${task.id}" title="Delete">🗑</button>
+    </div>
+    <p class="card-title">${escapeHtml(task.title)}</p>
+    ${task.description ? `<p class="card-desc">${escapeHtml(task.description)}</p>` : ''}
+    <div class="card-meta">${label}${due}<span>${task.createdDate || ''}</span></div>
+  `;
+  attachDrag(el);
+  return el;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---- Add/Edit modal ---- */
+const backdrop = document.getElementById('modal-backdrop');
+let editingId = null, editingCol = null, addingCol = null;
+
+function openAddModal(col){
+  editingId = null; editingCol = null; addingCol = col;
+  document.getElementById('modal-title').textContent = 'Add task';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-due').value = '';
+  document.getElementById('f-label').value = '';
+  backdrop.style.display = 'flex';
+  document.getElementById('f-title').focus();
+}
+function openEditModal(id, col){
+  const task = data[col].find(t => t.id === id);
+  if(!task) return;
+  editingId = id; editingCol = col; addingCol = null;
+  document.getElementById('modal-title').textContent = 'Edit task';
+  document.getElementById('f-title').value = task.title || '';
+  document.getElementById('f-desc').value = task.description || '';
+  document.getElementById('f-due').value = task.dueDate || '';
+  document.getElementById('f-label').value = task.label || '';
+  backdrop.style.display = 'flex';
+  document.getElementById('f-title').focus();
+}
+function closeModal(){ backdrop.style.display = 'none'; }
+
+document.getElementById('modal-cancel').onclick = closeModal;
+backdrop.addEventListener('click', e => { if(e.target === backdrop) closeModal(); });
+
+document.getElementById('modal-save').onclick = () => {
+  const title = document.getElementById('f-title').value.trim();
+  if(!title){ document.getElementById('f-title').focus(); return; }
+  const fields = {
+    title,
+    description: document.getElementById('f-desc').value.trim(),
+    dueDate: document.getElementById('f-due').value || '',
+    label: document.getElementById('f-label').value.trim()
+  };
+  if(editingId){
+    const task = data[editingCol].find(t => t.id === editingId);
+    Object.assign(task, fields);
+  } else {
+    data[addingCol].push({
+      id: crypto.randomUUID(),
+      createdDate: todayISO(),
+      ...fields
+    });
+  }
+  closeModal();
+  render();
+  save();
+};
+
+document.querySelectorAll('[data-add-col]').forEach(btn => {
+  btn.onclick = () => openAddModal(btn.dataset.addCol);
+});
+
+document.getElementById('board').addEventListener('click', e => {
+  const editBtn = e.target.closest('[data-edit]');
+  const delBtn = e.target.closest('[data-delete]');
+  if(editBtn){
+    const card = editBtn.closest('.card');
+    openEditModal(card.dataset.id, card.dataset.col);
+  } else if(delBtn){
+    const card = delBtn.closest('.card');
+    if(confirm('Delete this task?')){
+      data[card.dataset.col] = data[card.dataset.col].filter(t => t.id !== card.dataset.id);
+      render();
+      save();
+    }
+  }
+});
+
+/* ---- Drag and drop (pointer events, works mouse + touch) ---- */
+let dragState = null;
+
+function attachDrag(cardEl){
+  cardEl.addEventListener('pointerdown', e => {
+    if(e.target.closest('.icon-btn')) return; // don't drag when clicking edit/delete
+    startDrag(e, cardEl);
+  });
+}
+
+function startDrag(e, cardEl){
+  e.preventDefault();
+  const rect = cardEl.getBoundingClientRect();
+  dragState = {
+    id: cardEl.dataset.id,
+    fromCol: cardEl.dataset.col,
+    offsetX: e.clientX - rect.left,
+    offsetY: e.clientY - rect.top,
+    width: rect.width
+  };
+  cardEl.classList.add('dragging');
+
+  const ghost = cardEl.cloneNode(true);
+  ghost.style.position = 'fixed';
+  ghost.style.zIndex = '100';
+  ghost.style.width = dragState.width + 'px';
+  ghost.style.pointerEvents = 'none';
+  ghost.style.left = (e.clientX - dragState.offsetX) + 'px';
+  ghost.style.top = (e.clientY - dragState.offsetY) + 'px';
+  ghost.classList.remove('dragging');
+  ghost.id = 'drag-ghost';
+  document.body.appendChild(ghost);
+
+  const dropGhost = document.createElement('div');
+  dropGhost.className = 'drop-ghost';
+  dragState.dropGhost = dropGhost;
+  dragState.origCardEl = cardEl;
+  dragState.ghostEl = ghost;
+
+  function onMove(ev){
+    ghost.style.left = (ev.clientX - dragState.offsetX) + 'px';
+    ghost.style.top = (ev.clientY - dragState.offsetY) + 'px';
+    positionDropGhost(ev.clientX, ev.clientY);
+  }
+  function onUp(ev){
+    document.removeEventListener('pointermove', onMove);
+    document.removeEventListener('pointerup', onUp);
+    finishDrag(ev.clientX, ev.clientY);
+  }
+  document.addEventListener('pointermove', onMove);
+  document.addEventListener('pointerup', onUp);
+}
+
+function positionDropGhost(x, y){
+  const colEl = document.elementFromPoint(x, y)?.closest('.card-list');
+  if(!colEl){ dragState.dropGhost.remove(); dragState.targetCol = null; return; }
+  dragState.targetCol = colEl.dataset.col;
+  const cards = [...colEl.querySelectorAll('.card:not(.dragging)')];
+  let inserted = false;
+  for(const c of cards){
+    const r = c.getBoundingClientRect();
+    if(y < r.top + r.height/2){
+      colEl.insertBefore(dragState.dropGhost, c);
+      inserted = true;
+      break;
+    }
+  }
+  if(!inserted) colEl.appendChild(dragState.dropGhost);
+}
+
+function finishDrag(x, y){
+  const ghost = document.getElementById('drag-ghost');
+  if(ghost) ghost.remove();
+  dragState.origCardEl.classList.remove('dragging');
+
+  const targetCol = dragState.targetCol;
+  const dropGhost = dragState.dropGhost;
+  const insertIndexEl = dropGhost.parentElement ? dropGhost : null;
+
+  if(targetCol){
+    const fromCol = dragState.fromCol;
+    const taskIdx = data[fromCol].findIndex(t => t.id === dragState.id);
+    const [task] = data[fromCol].splice(taskIdx, 1);
+
+    let insertAt = data[targetCol].length;
+    if(insertIndexEl && insertIndexEl.parentElement){
+      const siblings = [...insertIndexEl.parentElement.children].filter(c => (c.classList.contains('card') && !c.classList.contains('dragging')) || c === insertIndexEl);
+      insertAt = siblings.indexOf(insertIndexEl);
+      if(insertAt < 0) insertAt = data[targetCol].length;
+    }
+    data[targetCol].splice(insertAt, 0, task);
+    save();
+  }
+  dropGhost.remove();
+  dragState = null;
+  render();
+}
+
+/* ---- Login ---- */
+const loginPanel = document.getElementById('login-panel');
+document.getElementById('login-toggle').onclick = () => {
+  loginPanel.style.display = loginPanel.style.display === 'flex' ? 'none' : 'flex';
+  document.getElementById('login-error').textContent = '';
+};
+document.getElementById('login-cancel').onclick = () => { loginPanel.style.display = 'none'; };
+
+document.getElementById('login-btn').onclick = async () => {
+  const val = document.getElementById('token-input').value.trim();
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+  if(!val){ errEl.textContent = 'Enter a token.'; return; }
+  token = val;
+  try{
+    const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
+    if(!res.ok) throw new Error('Could not verify token (' + res.status + '). Check the token and repo permissions.');
+    const json = await res.json();
+    sha = json.sha;
+    document.getElementById('login-toggle').textContent = 'Logged in ✓';
+    document.getElementById('login-toggle').disabled = true;
+    loginPanel.style.display = 'none';
+    setStatus('Logged in');
+  }catch(e){
+    token = null;
+    errEl.textContent = e.message;
+  }
+};
+
+/* ---- Save (autosave after every change) ---- */
+let saveQueue = Promise.resolve();
+function save(){
+  saveQueue = saveQueue.then(doSave);
+}
+async function doSave(){
+  if(!token){
+    setStatus('Not logged in — changes are local only', 'err');
+    return;
+  }
+  setStatus('Saving…');
+  try{
+    const latest = await api(`/contents/${GH.path}?ref=${GH.branch}`);
+    if(!latest.ok) throw new Error('Could not read latest file (' + latest.status + ')');
+    const latestJson = await latest.json();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const res = await api(`/contents/${GH.path}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        message: 'Update tasks',
+        content,
+        sha: latestJson.sha,
+        branch: GH.branch
+      })
+    });
+    if(!res.ok){
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || ('Save failed (' + res.status + ')'));
+    }
+    const result = await res.json();
+    sha = result.content.sha;
+    setStatus('Saved ✓', 'ok');
+  }catch(e){
+    setStatus('Error: ' + e.message, 'err');
+  }
+}
+
+loadTasks();
+</script>
+
+</body>
+</html>
