@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hey there 👋</div>
+    <div class="text-5xl font-bold">Lorenzo Bernad</div>
+    <div class="text-2xl py-3 font-bold">
+      Senior Analytics Engineer / Senior Auditor — SQL · Python · Power BI · Microsoft Cloud Services
+    </div>
+    <div class="py-2">
+      <text class="text-lg">
+        Senior Auditor specializing in audit analytics, data engineering, and business intelligence, with hands-on
+        experience in SQL, Python, Power BI, and Microsoft cloud services across banking and regulated environments.
+        Builds end-to-end analytics solutions — from data extraction and validation to dashboards highlighting
+        exceptions, control gaps, and performance risks.
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn" href="mailto:lmsbernad@gmail.com">Get in touch</a>
+      <a href={`${import.meta.env.BASE_URL}cv`} class="btn btn-outline ml-5"> View CV </a>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">About</div>
+  </div>
+  <div class="mb-10 text-justify">
+    I'm a Senior Auditor at Bank of Commerce, where I support audit and business reviews by extracting, cleaning, and
+    validating banking data using SQL and Python — turning raw tables into analysis-ready datasets with
+    documentation and quality checks. I build Power BI dashboards and recurring MI reports that help stakeholders
+    spot anomalies, control gaps, and performance issues. I also co-founded Infoseer Consulting, a data analytics
+    and AI consultancy helping Philippine businesses use their data to make better decisions.
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Highlights</div>
+  </div>
+
+  <HorizontalCard
+    title="Best Research Paper Award"
+    desc="Digital Transformation Meets Green Innovation — awarded at the 6th Northern Philippines Business Research Conference, 2025."
+    url={`${import.meta.env.BASE_URL}projects`}
+    target="_self"
+    badge="AWARD"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Audit Exception Monitoring Dashboard (Power BI)"
+    desc="End-to-end Power BI dashboard to monitor audit exceptions, control breaches, and key risk indicators, with drill-downs by business unit, process, and risk category."
+    url={`${import.meta.env.BASE_URL}projects`}
+    target="_self"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="See all achievements"
+    desc="SQL analytics engineering, Python data automation, and more."
+    url={`${import.meta.env.BASE_URL}projects`}
+    target="_self"
+  />
+</BaseLayout>

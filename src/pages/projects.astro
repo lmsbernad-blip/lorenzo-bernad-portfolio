@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+---
+
+<BaseLayout title="Achievements" sideBarActiveItemID="projects">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">Achievements & Projects</div>
+  </div>
+
+  <HorizontalCard
+    title="Best Research Paper Award"
+    desc={`"Digital Transformation Meets Green Innovation: A Literature Review of Digital Transformation's Role in Telcos' Sustainable Management and Business Practices" — awarded at the 6th Northern Philippines Business Research Conference, 2025.`}
+    url="#"
+    target="_self"
+    badge="AWARD"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Audit Exception Monitoring Dashboard (Power BI)"
+    desc="Designed an end-to-end Power BI dashboard to monitor audit exceptions, control breaches, and key risk indicators, with drill-downs by business unit, process, and risk category."
+    url="#"
+    target="_self"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="SQL Analytics Engineering Project"
+    desc="Optimized SQL queries and views to extract, clean, and standardize large transactional datasets, with data validation checks and analytics-ready tables to support BI dashboards and audit use cases."
+    url="#"
+    target="_self"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Python Data Automation Project"
+    desc="Built Python scripts to automate recurring data extraction, cleaning, and reconciliation tasks, reducing manual processing time across multiple reporting cycles."
+    url="#"
+    target="_self"
+  />
+</BaseLayout>

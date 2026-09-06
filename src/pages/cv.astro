@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
+---
+
+<BaseLayout title="CV" sideBarActiveItemID="cv">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Profile</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    I'm a Senior Auditor at Bank of Commerce, where I support audit and business reviews by extracting, cleaning,
+    and validating banking data using SQL and Python — turning raw tables into analysis-ready datasets with
+    documentation and quality checks. I build Power BI dashboards and recurring MI reports that help stakeholders
+    spot anomalies, control gaps, and performance issues. Before this, I worked across healthcare analytics
+    (Proview Global), sales/inventory reporting (Scriptmed), and earlier internship roles in valuation advisory and
+    banking, giving me a broad base in translating business requirements into data-driven reports. I also
+    co-founded Infoseer Consulting, a data analytics and AI consultancy helping Philippine businesses use their
+    data to make better decisions — where I lead client relationships and business strategy.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Master in Applied Business Analytics"
+      subtitle="2024 to 2026 at University of Asia & the Pacific, Pasig, Philippines"
+    />
+    <TimeLineElement
+      title="BS in Business Administration, specialized in Business Analytics"
+      subtitle="University of Asia & the Pacific, Pasig, Philippines"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement title="Senior Auditor at Bank of Commerce" subtitle="Aug 2025 – Present">
+      Support audit and business reviews by extracting, cleaning, and validating banking data using SQL and
+      Python; turn raw tables into analysis-ready datasets with documentation and quality checks. Build Power BI
+      dashboards and recurring MI reports (KPIs, trends, exception monitoring) to help stakeholders spot anomalies,
+      control gaps, and performance issues. Deliver ad-hoc analytics (segmentation, reconciliations, root-cause
+      analysis) partnering with audit teams and business units.
+    </TimeLineElement>
+    <TimeLineElement title="Data Analyst at Scriptmed Inc." subtitle="Apr 2025 – Aug 2025">
+      Developed automated incentive reports tracking sales performance, commissions, and bonuses. Created stock
+      reports analyzing inventory levels, turnover rates, and supply chain trends. Performed data cleansing and
+      validation, identifying and correcting anomalies to ensure 100% accuracy in reporting.
+    </TimeLineElement>
+    <TimeLineElement title="Senior Health Management System Specialist at Proview Global Inc." subtitle="Oct 2019 – Jul 2025">
+      Developed analytical reports for healthcare clients to support operational and management decision-making.
+      Collaborated with account managers to translate business requirements into data-driven reports. Improved
+      reporting efficiency by optimizing report generation processes.
+    </TimeLineElement>
+    <TimeLineElement title="Research Assistant at Department of Trade and Industry" subtitle="Aug 2019 – Oct 2019">
+      Prepared analytical reports for healthcare clients, reducing decision-making time.
+    </TimeLineElement>
+    <TimeLineElement title="Intern at Aviso Valuation & Advisory Corp" subtitle="2019">
+      Designed and deployed real-time Power BI dashboards analyzing financial data of different clients.
+    </TimeLineElement>
+    <TimeLineElement title="Intern at UnionBank of the Philippines" subtitle="2018">
+      Delivered customized reports for internal stakeholders and external clients.
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Seminars</div>
+  </div>
+
+  <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>Data Ethics Seminar — hosted by Mr. Dominic Ligot, University of Asia & the Pacific (2025)</li>
+    <li>UA&P x Eskwelabs Hackathon — University of Asia & the Pacific (2025)</li>
+  </ul>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-5 columns-2 mx-6">
+    <li>SQL</li>
+    <li>Python</li>
+    <li>Power BI</li>
+    <li>Microsoft Cloud Services</li>
+    <li>Data Governance</li>
+  </ul>
+</BaseLayout>
