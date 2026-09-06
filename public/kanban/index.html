@@ -703,12 +703,23 @@ function finishDrag(){
 
 /* ---- Save (autosave after every change) ---- */
 let saveQueue = Promise.resolve();
+let pendingSaves = 0;
+
+window.addEventListener('beforeunload', (e) => {
+  if(pendingSaves > 0){
+    e.preventDefault();
+    e.returnValue = '';
+    return '';
+  }
+});
+
 function save(){
-  saveQueue = saveQueue.then(doSave);
+  pendingSaves++;
+  saveQueue = saveQueue.then(doSave).finally(() => { pendingSaves--; });
 }
 async function doSave(retrying){
-  if(!token){ setStatus('Not logged in', 'err'); return; }
-  setStatus('Saving…');
+  if(!token){ setStatus('Not logged in — this change is NOT saved', 'err'); return; }
+  setStatus('Saving… (do not close or refresh)');
   try{
     const latest = await api(`/contents/${GH.path}?ref=${GH.branch}`);
     if(!latest.ok) throw new Error('Could not read latest file (' + latest.status + ')');
