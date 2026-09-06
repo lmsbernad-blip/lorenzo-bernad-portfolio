@@ -238,8 +238,10 @@ function rawUrl(){
   return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${GH.path}?t=${Date.now()}`;
 }
 function api(path, opts={}){
-  return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}`, {
+  const sep = path.includes('?') ? '&' : '?';
+  return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}${sep}_=${Date.now()}`, {
     ...opts,
+    cache: 'no-store',
     headers: {
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/vnd.github+json',
