@@ -4,39 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My Tasks</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
 <style>
   :root{
     --bg:#f4f5f7; --card:#ffffff; --border:#dfe1e6; --text:#172b4d; --muted:#6b778c;
-    --accent:#0052cc; --danger:#de350b; --ok:#00875a;
+    --accent:#0052cc; --accent-dark:#0747a6; --danger:#de350b; --ok:#00875a; --warn:#ffab00;
     --col-head:#ebecf0;
+    --pri-high:#de350b; --pri-medium:#ffab00; --pri-low:#36b37e;
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
-  header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:8px;}
+
+  /* ---- Login screen ---- */
+  #login-screen{position:fixed;inset:0;background:linear-gradient(160deg,#0747a6,#0052cc);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px;}
+  #login-box{background:#fff;border-radius:10px;padding:32px 28px;width:100%;max-width:360px;box-shadow:0 8px 24px rgba(9,30,66,.25);}
+  #login-box h1{margin:0 0 4px;font-size:20px;}
+  #login-box p{margin:0 0 18px;font-size:13px;color:var(--muted);}
+  #login-box input{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;margin-bottom:10px;}
+  #login-box .btn{width:100%;padding:9px;font-size:14px;}
+  #login-err{color:var(--danger);font-size:12px;min-height:16px;margin-bottom:6px;}
+
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:10px;}
   header h1{font-size:18px;margin:0;}
+  #tabs{display:flex;gap:4px;background:var(--col-head);border-radius:7px;padding:3px;}
+  .tab-btn{background:none;border:none;padding:6px 14px;font-size:13px;border-radius:5px;color:var(--muted);font-weight:500;}
+  .tab-btn.active{background:#fff;color:var(--accent-dark);box-shadow:0 1px 2px rgba(9,30,66,.15);}
   #status-area{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
-  #save-status{min-width:70px;}
   #save-status.ok{color:var(--ok);}
   #save-status.err{color:var(--danger);}
   button{cursor:pointer;font-family:inherit;}
   .btn{background:var(--accent);color:#fff;border:none;border-radius:5px;padding:7px 12px;font-size:13px;}
   .btn:hover{opacity:.9;}
-  .btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:5px;padding:6px 11px;font-size:13px;}
   .btn-text{background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;padding:0;}
 
-  #login-panel{padding:10px 18px;background:#fffae6;border-bottom:1px solid #ffe380;display:none;gap:8px;align-items:center;flex-wrap:wrap;}
-  #login-panel input{padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;min-width:220px;flex:1;}
-  #login-error{color:var(--danger);font-size:12px;width:100%;}
-
   main{padding:16px;}
-  #board{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;}
-  .column{background:var(--col-head);border-radius:8px;flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;max-height:calc(100vh - 110px);}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* ---- Board view ---- */
+  .board-layout{display:flex;gap:16px;align-items:flex-start;}
+  #board{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;flex:1;min-width:0;}
+  .column{background:var(--col-head);border-radius:8px;flex:0 0 290px;scroll-snap-align:start;display:flex;flex-direction:column;max-height:calc(100vh - 130px);}
   .column-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 4px;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
   .count{background:#dfe1e6;border-radius:10px;padding:1px 8px;font-size:12px;}
   .card-list{flex:1;overflow-y:auto;padding:4px 10px 10px;min-height:40px;}
-  .card{background:var(--card);border-radius:6px;padding:10px 10px 8px;margin-bottom:8px;box-shadow:0 1px 2px rgba(9,30,66,.15);touch-action:none;position:relative;}
+  .card{background:var(--card);border-radius:6px;padding:10px 10px 8px;margin-bottom:8px;box-shadow:0 1px 2px rgba(9,30,66,.15);touch-action:none;position:relative;border-left:4px solid var(--pri-medium);}
+  .card[data-priority="high"]{border-left-color:var(--pri-high);}
+  .card[data-priority="low"]{border-left-color:var(--pri-low);}
   .card.dragging{opacity:.4;}
-  .card-title{font-size:14px;font-weight:600;margin:0 0 4px;word-break:break-word;}
+  .card-title{font-size:14px;font-weight:600;margin:0 0 4px;word-break:break-word;padding-right:44px;}
   .card-desc{font-size:12.5px;color:var(--muted);margin:0 0 6px;white-space:pre-wrap;word-break:break-word;}
   .card-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted);}
   .chip{border-radius:10px;padding:2px 8px;font-size:11px;background:#deebff;color:#0747a6;}
@@ -48,57 +64,138 @@
   .icon-btn:hover{background:#ebecf0;color:var(--text);}
   .add-task-btn{margin:4px 10px 10px;background:none;border:none;text-align:left;color:var(--muted);font-size:13px;padding:8px;border-radius:5px;}
   .add-task-btn:hover{background:#e6e8ec;color:var(--text);}
-
   .drop-ghost{border:2px dashed var(--accent);border-radius:6px;height:44px;margin-bottom:8px;background:rgba(0,82,204,.06);}
 
+  /* ---- Priority sidebar ---- */
+  #priority-panel{flex:0 0 250px;background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);max-height:calc(100vh - 130px);overflow-y:auto;}
+  #priority-panel h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
+  .pri-group{margin-bottom:14px;}
+  .pri-group-label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-bottom:6px;}
+  .pri-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .pri-item{font-size:12.5px;padding:5px 6px;border-radius:4px;margin-bottom:3px;background:var(--bg);cursor:pointer;}
+  .pri-item:hover{background:#e6e8ec;}
+  .pri-item .pri-item-due{color:var(--muted);font-size:11px;}
+  .pri-empty{font-size:12px;color:var(--muted);font-style:italic;}
+
+  /* ---- Dashboard view ---- */
+  #dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .chart-card{background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);}
+  .chart-card h3{margin:0 0 10px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
+  .chart-card .chart-wrap{position:relative;height:220px;}
+  #eda-empty{color:var(--muted);font-size:13px;}
+
+  /* ---- Calendar view ---- */
+  #calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  #calendar-header h2{font-size:15px;margin:0;}
+  .cal-nav-btn{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:5px 10px;font-size:13px;}
+  #calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cal-dow{font-size:11px;color:var(--muted);text-align:center;padding-bottom:4px;text-transform:uppercase;}
+  .cal-day{background:var(--card);border-radius:6px;min-height:64px;padding:6px;font-size:12px;position:relative;cursor:pointer;border:1px solid var(--border);}
+  .cal-day.empty{background:transparent;border:none;cursor:default;}
+  .cal-day.today{border-color:var(--accent);}
+  .cal-day .cal-daynum{font-weight:600;}
+  .cal-day.free{background:#fff;}
+  .cal-day.light{background:#e3fcef;}
+  .cal-day.medium{background:#fffae6;}
+  .cal-day.busy{background:#ffebe6;}
+  .cal-badge{position:absolute;bottom:4px;right:6px;font-size:11px;font-weight:600;color:var(--muted);}
+  #calendar-daylist{margin-top:16px;background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);}
+  #calendar-daylist h3{margin:0 0 8px;font-size:13px;}
+  #calendar-daylist .cd-item{font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--border);}
+  #calendar-daylist .cd-item:last-child{border-bottom:none;}
+
+  /* ---- Modal ---- */
   #modal-backdrop{display:none;position:fixed;inset:0;background:rgba(9,30,66,.5);align-items:center;justify-content:center;z-index:50;padding:16px;}
   #modal{background:#fff;border-radius:8px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;}
   #modal h2{margin:0 0 14px;font-size:16px;}
   #modal label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px;}
-  #modal input[type=text], #modal input[type=date], #modal textarea{width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-family:inherit;}
+  #modal input[type=text], #modal input[type=date], #modal textarea, #modal select{width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-family:inherit;}
   #modal textarea{resize:vertical;min-height:60px;}
   #modal .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
 
+  @media (max-width:860px){
+    .board-layout{flex-direction:column;}
+    #priority-panel{flex:1 1 auto;width:100%;max-height:none;}
+  }
   @media (max-width:700px){
     #board{scroll-snap-type:x mandatory;}
     .column{flex:0 0 88vw;}
     header h1{font-size:16px;}
+    .cal-day{min-height:48px;font-size:11px;}
   }
 </style>
 </head>
 <body>
 
+<div id="login-screen">
+  <div id="login-box">
+    <h1>My Tasks</h1>
+    <p>Enter your GitHub Personal Access Token to unlock the board.</p>
+    <div id="login-err"></div>
+    <input type="password" id="token-input" placeholder="GitHub Personal Access Token" autocomplete="off">
+    <button class="btn" id="login-btn">Unlock</button>
+  </div>
+</div>
+
 <header>
   <h1>My Tasks</h1>
+  <div id="tabs">
+    <button class="tab-btn active" data-tab="board">Board</button>
+    <button class="tab-btn" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="calendar">Calendar</button>
+  </div>
   <div id="status-area">
-    <span id="save-status">Loading…</span>
-    <button class="btn-text" id="login-toggle">Log in to save</button>
+    <span id="save-status">—</span>
+    <button class="btn-text" id="logout-btn">Log out</button>
   </div>
 </header>
 
-<div id="login-panel">
-  <input type="password" id="token-input" placeholder="GitHub Personal Access Token" autocomplete="off">
-  <button class="btn" id="login-btn">Log in</button>
-  <button class="btn-text" id="login-cancel">Cancel</button>
-  <div id="login-error"></div>
-</div>
-
 <main>
-  <div id="board">
-    <div class="column" data-col="todo">
-      <div class="column-head"><span>To Do</span><span class="count" id="count-todo">0</span></div>
-      <div class="card-list" data-col="todo"></div>
-      <button class="add-task-btn" data-add-col="todo">+ Add task</button>
+  <div id="view-board" class="view active">
+    <div class="board-layout">
+      <div id="board">
+        <div class="column" data-col="todo">
+          <div class="column-head"><span>To Do</span><span class="count" id="count-todo">0</span></div>
+          <div class="card-list" data-col="todo"></div>
+          <button class="add-task-btn" data-add-col="todo">+ Add task</button>
+        </div>
+        <div class="column" data-col="inprogress">
+          <div class="column-head"><span>In Progress</span><span class="count" id="count-inprogress">0</span></div>
+          <div class="card-list" data-col="inprogress"></div>
+          <button class="add-task-btn" data-add-col="inprogress">+ Add task</button>
+        </div>
+        <div class="column" data-col="done">
+          <div class="column-head"><span>Done</span><span class="count" id="count-done">0</span></div>
+          <div class="card-list" data-col="done"></div>
+          <button class="add-task-btn" data-add-col="done">+ Add task</button>
+        </div>
+      </div>
+      <aside id="priority-panel">
+        <h3>Priority overview</h3>
+        <div id="priority-list"></div>
+      </aside>
     </div>
-    <div class="column" data-col="inprogress">
-      <div class="column-head"><span>In Progress</span><span class="count" id="count-inprogress">0</span></div>
-      <div class="card-list" data-col="inprogress"></div>
-      <button class="add-task-btn" data-add-col="inprogress">+ Add task</button>
+  </div>
+
+  <div id="view-dashboard" class="view">
+    <div id="dashboard-grid">
+      <div class="chart-card"><h3>Tasks by column</h3><div class="chart-wrap"><canvas id="chart-column"></canvas></div></div>
+      <div class="chart-card"><h3>Tasks by priority</h3><div class="chart-wrap"><canvas id="chart-priority"></canvas></div></div>
+      <div class="chart-card"><h3>Tasks by label</h3><div class="chart-wrap"><canvas id="chart-label"></canvas></div></div>
+      <div class="chart-card"><h3>Due-date breakdown</h3><div class="chart-wrap"><canvas id="chart-due"></canvas></div></div>
     </div>
-    <div class="column" data-col="done">
-      <div class="column-head"><span>Done</span><span class="count" id="count-done">0</span></div>
-      <div class="card-list" data-col="done"></div>
-      <button class="add-task-btn" data-add-col="done">+ Add task</button>
+  </div>
+
+  <div id="view-calendar" class="view">
+    <div id="calendar-header">
+      <button class="cal-nav-btn" id="cal-prev">‹ Prev</button>
+      <h2 id="cal-month-label"></h2>
+      <button class="cal-nav-btn" id="cal-next">Next ›</button>
+    </div>
+    <div id="calendar-grid"></div>
+    <div id="calendar-daylist" style="display:none;">
+      <h3 id="cd-title"></h3>
+      <div id="cd-items"></div>
     </div>
   </div>
 </main>
@@ -112,6 +209,12 @@
     <textarea id="f-desc" maxlength="500"></textarea>
     <label>Due date (optional)</label>
     <input type="date" id="f-due">
+    <label>Priority</label>
+    <select id="f-priority">
+      <option value="low">Low</option>
+      <option value="medium" selected>Medium</option>
+      <option value="high">High</option>
+    </select>
     <label>Label (optional)</label>
     <input type="text" id="f-label" maxlength="30" placeholder="e.g. work, urgent">
     <div class="modal-actions">
@@ -127,6 +230,9 @@ let token = null; // in-memory only, never persisted
 let sha = null;
 let data = { todo: [], inprogress: [], done: [] };
 const COLS = ['todo', 'inprogress', 'done'];
+const COL_LABELS = { todo: 'To Do', inprogress: 'In Progress', done: 'Done' };
+const PRI_COLORS = { high: '#de350b', medium: '#ffab00', low: '#36b37e' };
+const PRI_ORDER = { high: 0, medium: 1, low: 2 };
 
 const statusEl = document.getElementById('save-status');
 function setStatus(text, cls){
@@ -134,9 +240,6 @@ function setStatus(text, cls){
   statusEl.className = cls || '';
 }
 
-function rawUrl(){
-  return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${GH.path}?t=${Date.now()}`;
-}
 function api(path, opts={}){
   return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}`, {
     ...opts,
@@ -148,20 +251,53 @@ function api(path, opts={}){
   });
 }
 
-async function loadTasks(){
+/* ---- Login (gates viewing, not just saving) ---- */
+document.getElementById('login-btn').onclick = attemptLogin;
+document.getElementById('token-input').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
+
+async function attemptLogin(){
+  const val = document.getElementById('token-input').value.trim();
+  const errEl = document.getElementById('login-err');
+  errEl.textContent = '';
+  if(!val){ errEl.textContent = 'Enter a token.'; return; }
+  token = val;
   try{
-    const res = await fetch(rawUrl(), { cache: 'no-store' });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    data = await res.json();
+    const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
+    if(!res.ok) throw new Error('Invalid token or no access (' + res.status + ').');
+    const json = await res.json();
+    sha = json.sha;
+    data = JSON.parse(decodeURIComponent(escape(atob(json.content))));
     COLS.forEach(c => { if(!Array.isArray(data[c])) data[c] = []; });
+    data.todo.forEach(normalizeTask); data.inprogress.forEach(normalizeTask); data.done.forEach(normalizeTask);
+    document.getElementById('login-screen').style.display = 'none';
     setStatus('Loaded');
-    render();
+    renderAll();
   }catch(e){
-    setStatus('Error loading tasks', 'err');
-    render();
+    token = null;
+    errEl.textContent = e.message;
   }
 }
+function normalizeTask(t){ if(!t.priority) t.priority = 'medium'; }
 
+document.getElementById('logout-btn').onclick = () => {
+  token = null; sha = null;
+  document.getElementById('token-input').value = '';
+  document.getElementById('login-screen').style.display = 'flex';
+};
+
+/* ---- Tabs ---- */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-' + btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab === 'dashboard') renderDashboard();
+    if(btn.dataset.tab === 'calendar') renderCalendar();
+  };
+});
+
+/* ---- Date helpers ---- */
 function fmtDate(iso){
   if(!iso) return '';
   const d = new Date(iso + 'T00:00:00');
@@ -175,6 +311,21 @@ function isOverdue(iso){
 function todayISO(){
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function allTasks(){
+  return COLS.flatMap(c => data[c].map(t => ({...t, _col: c})));
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---- Render: board ---- */
+function renderAll(){
+  render();
+  renderPriorityPanel();
+  const activeTab = document.querySelector('.tab-btn.active')?.dataset.tab;
+  if(activeTab === 'dashboard') renderDashboard();
+  if(activeTab === 'calendar') renderCalendar();
 }
 
 function render(){
@@ -191,6 +342,7 @@ function renderCard(task, col){
   el.className = 'card';
   el.dataset.id = task.id;
   el.dataset.col = col;
+  el.dataset.priority = task.priority || 'medium';
 
   const due = task.dueDate ? `<span class="due${isOverdue(task.dueDate) ? ' overdue' : ''}">${fmtDate(task.dueDate)}</span>` : '';
   const label = task.label ? `<span class="chip">${escapeHtml(task.label)}</span>` : '';
@@ -208,8 +360,147 @@ function renderCard(task, col){
   return el;
 }
 
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ---- Render: priority sidebar ---- */
+function renderPriorityPanel(){
+  const container = document.getElementById('priority-list');
+  container.innerHTML = '';
+  const tasks = allTasks().filter(t => t._col !== 'done');
+  ['high','medium','low'].forEach(pri => {
+    const group = tasks.filter(t => (t.priority || 'medium') === pri)
+      .sort((a,b) => (a.dueDate||'9999').localeCompare(b.dueDate||'9999'));
+    const div = document.createElement('div');
+    div.className = 'pri-group';
+    const label = pri === 'high' ? 'High' : pri === 'medium' ? 'Medium' : 'Low';
+    div.innerHTML = `<div class="pri-group-label"><span class="pri-dot" style="background:${PRI_COLORS[pri]}"></span>${label} (${group.length})</div>`;
+    if(group.length === 0){
+      div.innerHTML += `<div class="pri-empty">Nothing here</div>`;
+    } else {
+      group.forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'pri-item';
+        item.dataset.id = t.id; item.dataset.col = t._col;
+        item.innerHTML = `${escapeHtml(t.title)}${t.dueDate ? `<div class="pri-item-due">${COL_LABELS[t._col]} · due ${fmtDate(t.dueDate)}</div>` : `<div class="pri-item-due">${COL_LABELS[t._col]}</div>`}`;
+        item.onclick = () => openEditModal(t.id, t._col);
+        div.appendChild(item);
+      });
+    }
+    container.appendChild(div);
+  });
+}
+
+/* ---- Render: dashboard (EDA charts) ---- */
+let charts = {};
+function renderDashboard(){
+  const tasks = allTasks();
+  if(typeof Chart === 'undefined') return;
+
+  destroyChart('column');
+  charts.column = new Chart(document.getElementById('chart-column'), {
+    type: 'bar',
+    data: {
+      labels: ['To Do', 'In Progress', 'Done'],
+      datasets: [{ data: COLS.map(c => data[c].length), backgroundColor: ['#0052cc','#ffab00','#36b37e'] }]
+    },
+    options: baseChartOpts(false)
+  });
+
+  destroyChart('priority');
+  const priCounts = { high:0, medium:0, low:0 };
+  tasks.forEach(t => priCounts[t.priority || 'medium']++);
+  charts.priority = new Chart(document.getElementById('chart-priority'), {
+    type: 'doughnut',
+    data: {
+      labels: ['High','Medium','Low'],
+      datasets: [{ data: [priCounts.high, priCounts.medium, priCounts.low], backgroundColor: [PRI_COLORS.high, PRI_COLORS.medium, PRI_COLORS.low] }]
+    },
+    options: baseChartOpts(true)
+  });
+
+  destroyChart('label');
+  const labelCounts = {};
+  tasks.forEach(t => { const l = t.label || 'No label'; labelCounts[l] = (labelCounts[l]||0) + 1; });
+  const labelEntries = Object.entries(labelCounts).sort((a,b) => b[1]-a[1]).slice(0, 8);
+  charts.label = new Chart(document.getElementById('chart-label'), {
+    type: 'bar',
+    data: {
+      labels: labelEntries.map(e => e[0]),
+      datasets: [{ data: labelEntries.map(e => e[1]), backgroundColor: '#0052cc' }]
+    },
+    options: { ...baseChartOpts(false), indexAxis: 'y' }
+  });
+
+  destroyChart('due');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const in7 = new Date(today); in7.setDate(in7.getDate() + 7);
+  let overdue=0, soon=0, later=0, none=0;
+  tasks.forEach(t => {
+    if(!t.dueDate){ none++; return; }
+    const d = new Date(t.dueDate + 'T00:00:00');
+    if(d < today && t._col !== 'done') overdue++;
+    else if(d <= in7) soon++;
+    else later++;
+  });
+  charts.due = new Chart(document.getElementById('chart-due'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Overdue','Due within 7 days','Later','No due date'],
+      datasets: [{ data: [overdue, soon, later, none], backgroundColor: ['#de350b','#ffab00','#0052cc','#dfe1e6'] }]
+    },
+    options: baseChartOpts(true)
+  });
+}
+function destroyChart(key){ if(charts[key]){ charts[key].destroy(); delete charts[key]; } }
+function baseChartOpts(legend){
+  return { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display: legend, position:'bottom', labels:{ boxWidth:12, font:{size:11} } } }, scales: legend ? {} : { y:{ beginAtZero:true, ticks:{ precision:0 } } } };
+}
+
+/* ---- Render: calendar ---- */
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth(); // 0-indexed
+
+document.getElementById('cal-prev').onclick = () => { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); };
+document.getElementById('cal-next').onclick = () => { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); };
+
+function renderCalendar(){
+  const grid = document.getElementById('calendar-grid');
+  grid.innerHTML = '';
+  const monthLabel = new Date(calYear, calMonth, 1).toLocaleDateString(undefined, { month:'long', year:'numeric' });
+  document.getElementById('cal-month-label').textContent = monthLabel;
+
+  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => {
+    const el = document.createElement('div'); el.className = 'cal-dow'; el.textContent = d; grid.appendChild(el);
+  });
+
+  const tasksByDate = {};
+  allTasks().forEach(t => { if(t.dueDate){ (tasksByDate[t.dueDate] = tasksByDate[t.dueDate] || []).push(t); } });
+
+  const firstDow = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const todayStr = todayISO();
+
+  for(let i=0;i<firstDow;i++){ const e = document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+
+  for(let day=1; day<=daysInMonth; day++){
+    const iso = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const count = (tasksByDate[iso] || []).length;
+    let level = 'free';
+    if(count === 1) level = 'light'; else if(count === 2) level = 'medium'; else if(count >= 3) level = 'busy';
+    const el = document.createElement('div');
+    el.className = `cal-day ${level}${iso === todayStr ? ' today' : ''}`;
+    el.innerHTML = `<div class="cal-daynum">${day}</div>${count ? `<div class="cal-badge">${count}</div>` : ''}`;
+    el.onclick = () => showDayTasks(iso, tasksByDate[iso] || []);
+    grid.appendChild(el);
+  }
+}
+function showDayTasks(iso, tasks){
+  const panel = document.getElementById('calendar-daylist');
+  const d = new Date(iso + 'T00:00:00');
+  document.getElementById('cd-title').textContent = d.toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
+  const itemsEl = document.getElementById('cd-items');
+  itemsEl.innerHTML = tasks.length
+    ? tasks.map(t => `<div class="cd-item"><strong>${escapeHtml(t.title)}</strong> — ${COL_LABELS[t._col]}, ${t.priority || 'medium'} priority</div>`).join('')
+    : '<div class="cd-item">No tasks due this day.</div>';
+  panel.style.display = 'block';
 }
 
 /* ---- Add/Edit modal ---- */
@@ -222,6 +513,7 @@ function openAddModal(col){
   document.getElementById('f-title').value = '';
   document.getElementById('f-desc').value = '';
   document.getElementById('f-due').value = '';
+  document.getElementById('f-priority').value = 'medium';
   document.getElementById('f-label').value = '';
   backdrop.style.display = 'flex';
   document.getElementById('f-title').focus();
@@ -234,6 +526,7 @@ function openEditModal(id, col){
   document.getElementById('f-title').value = task.title || '';
   document.getElementById('f-desc').value = task.description || '';
   document.getElementById('f-due').value = task.dueDate || '';
+  document.getElementById('f-priority').value = task.priority || 'medium';
   document.getElementById('f-label').value = task.label || '';
   backdrop.style.display = 'flex';
   document.getElementById('f-title').focus();
@@ -250,6 +543,7 @@ document.getElementById('modal-save').onclick = () => {
     title,
     description: document.getElementById('f-desc').value.trim(),
     dueDate: document.getElementById('f-due').value || '',
+    priority: document.getElementById('f-priority').value,
     label: document.getElementById('f-label').value.trim()
   };
   if(editingId){
@@ -263,7 +557,7 @@ document.getElementById('modal-save').onclick = () => {
     });
   }
   closeModal();
-  render();
+  renderAll();
   save();
 };
 
@@ -281,7 +575,7 @@ document.getElementById('board').addEventListener('click', e => {
     const card = delBtn.closest('.card');
     if(confirm('Delete this task?')){
       data[card.dataset.col] = data[card.dataset.col].filter(t => t.id !== card.dataset.id);
-      render();
+      renderAll();
       save();
     }
   }
@@ -292,7 +586,7 @@ let dragState = null;
 
 function attachDrag(cardEl){
   cardEl.addEventListener('pointerdown', e => {
-    if(e.target.closest('.icon-btn')) return; // don't drag when clicking edit/delete
+    if(e.target.closest('.icon-btn')) return;
     startDrag(e, cardEl);
   });
 }
@@ -334,7 +628,7 @@ function startDrag(e, cardEl){
   function onUp(ev){
     document.removeEventListener('pointermove', onMove);
     document.removeEventListener('pointerup', onUp);
-    finishDrag(ev.clientX, ev.clientY);
+    finishDrag();
   }
   document.addEventListener('pointermove', onMove);
   document.addEventListener('pointerup', onUp);
@@ -357,7 +651,7 @@ function positionDropGhost(x, y){
   if(!inserted) colEl.appendChild(dragState.dropGhost);
 }
 
-function finishDrag(x, y){
+function finishDrag(){
   const ghost = document.getElementById('drag-ghost');
   if(ghost) ghost.remove();
   dragState.origCardEl.classList.remove('dragging');
@@ -382,37 +676,8 @@ function finishDrag(x, y){
   }
   dropGhost.remove();
   dragState = null;
-  render();
+  renderAll();
 }
-
-/* ---- Login ---- */
-const loginPanel = document.getElementById('login-panel');
-document.getElementById('login-toggle').onclick = () => {
-  loginPanel.style.display = loginPanel.style.display === 'flex' ? 'none' : 'flex';
-  document.getElementById('login-error').textContent = '';
-};
-document.getElementById('login-cancel').onclick = () => { loginPanel.style.display = 'none'; };
-
-document.getElementById('login-btn').onclick = async () => {
-  const val = document.getElementById('token-input').value.trim();
-  const errEl = document.getElementById('login-error');
-  errEl.textContent = '';
-  if(!val){ errEl.textContent = 'Enter a token.'; return; }
-  token = val;
-  try{
-    const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
-    if(!res.ok) throw new Error('Could not verify token (' + res.status + '). Check the token and repo permissions.');
-    const json = await res.json();
-    sha = json.sha;
-    document.getElementById('login-toggle').textContent = 'Logged in ✓';
-    document.getElementById('login-toggle').disabled = true;
-    loginPanel.style.display = 'none';
-    setStatus('Logged in');
-  }catch(e){
-    token = null;
-    errEl.textContent = e.message;
-  }
-};
 
 /* ---- Save (autosave after every change) ---- */
 let saveQueue = Promise.resolve();
@@ -420,10 +685,7 @@ function save(){
   saveQueue = saveQueue.then(doSave);
 }
 async function doSave(){
-  if(!token){
-    setStatus('Not logged in — changes are local only', 'err');
-    return;
-  }
+  if(!token){ setStatus('Not logged in', 'err'); return; }
   setStatus('Saving…');
   try{
     const latest = await api(`/contents/${GH.path}?ref=${GH.branch}`);
@@ -450,8 +712,6 @@ async function doSave(){
     setStatus('Error: ' + e.message, 'err');
   }
 }
-
-loadTasks();
 </script>
 
 </body>
