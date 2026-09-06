@@ -15,14 +15,10 @@
   *{box-sizing:border-box;}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
 
-  /* ---- Login screen ---- */
-  #login-screen{position:fixed;inset:0;background:linear-gradient(160deg,#0747a6,#0052cc);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px;}
-  #login-box{background:#fff;border-radius:10px;padding:32px 28px;width:100%;max-width:360px;box-shadow:0 8px 24px rgba(9,30,66,.25);}
-  #login-box h1{margin:0 0 4px;font-size:20px;}
-  #login-box p{margin:0 0 18px;font-size:13px;color:var(--muted);}
-  #login-box input{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;margin-bottom:10px;}
-  #login-box .btn{width:100%;padding:9px;font-size:14px;}
-  #login-err{color:var(--danger);font-size:12px;min-height:16px;margin-bottom:6px;}
+  /* ---- Login panel (only needed to save, not to view) ---- */
+  #login-panel{display:none;padding:10px 18px;background:#fffae6;border-bottom:1px solid #ffe380;gap:8px;align-items:center;flex-wrap:wrap;}
+  #login-panel input{padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;min-width:220px;flex:1;}
+  #login-err{color:var(--danger);font-size:12px;width:100%;}
 
   header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:10px;}
   header h1{font-size:18px;margin:0;}
@@ -127,16 +123,6 @@
 </head>
 <body>
 
-<div id="login-screen">
-  <div id="login-box">
-    <h1>My Tasks</h1>
-    <p>Enter your GitHub Personal Access Token to unlock the board.</p>
-    <div id="login-err"></div>
-    <input type="password" id="token-input" placeholder="GitHub Personal Access Token" autocomplete="off">
-    <button class="btn" id="login-btn">Unlock</button>
-  </div>
-</div>
-
 <header>
   <h1>My Tasks</h1>
   <div id="tabs">
@@ -145,10 +131,17 @@
     <button class="tab-btn" data-tab="calendar">Calendar</button>
   </div>
   <div id="status-area">
-    <span id="save-status">—</span>
-    <button class="btn-text" id="logout-btn">Log out</button>
+    <span id="save-status">Loading…</span>
+    <button class="btn-text" id="login-toggle">Log in to save</button>
   </div>
 </header>
+
+<div id="login-panel">
+  <input type="password" id="token-input" placeholder="GitHub Personal Access Token" autocomplete="off">
+  <button class="btn" id="login-btn">Log in</button>
+  <button class="btn-text" id="login-cancel">Cancel</button>
+  <div id="login-err"></div>
+</div>
 
 <main>
   <div id="view-board" class="view active">
@@ -225,7 +218,7 @@
 </div>
 
 <script>
-const GH = { owner: 'lmsbernad-blip', repo: 'Lorenzo_tasks', branch: 'main', path: 'tasks.json' };
+const GH = { owner: 'lmsbernad-blip', repo: 'lorenzo-bernad-portfolio', branch: 'main', path: 'public/kanban/tasks.json' };
 let token = null; // in-memory only, never persisted
 let sha = null;
 let data = { todo: [], inprogress: [], done: [] };
@@ -240,6 +233,9 @@ function setStatus(text, cls){
   statusEl.className = cls || '';
 }
 
+function rawUrl(){
+  return `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${GH.path}?t=${Date.now()}`;
+}
 function api(path, opts={}){
   return fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}${path}`, {
     ...opts,
@@ -250,8 +246,31 @@ function api(path, opts={}){
     }
   });
 }
+function normalizeTask(t){ if(!t.priority) t.priority = 'medium'; }
 
-/* ---- Login (gates viewing, not just saving) ---- */
+/* ---- Load tasks (public, no login required to view) ---- */
+async function loadTasks(){
+  try{
+    const res = await fetch(rawUrl(), { cache: 'no-store' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    data = await res.json();
+    COLS.forEach(c => { if(!Array.isArray(data[c])) data[c] = []; });
+    data.todo.forEach(normalizeTask); data.inprogress.forEach(normalizeTask); data.done.forEach(normalizeTask);
+    setStatus('Loaded');
+    renderAll();
+  }catch(e){
+    setStatus('Error loading tasks', 'err');
+    renderAll();
+  }
+}
+
+/* ---- Login (only needed to save) ---- */
+const loginPanel = document.getElementById('login-panel');
+document.getElementById('login-toggle').onclick = () => {
+  loginPanel.style.display = loginPanel.style.display === 'flex' ? 'none' : 'flex';
+  document.getElementById('login-err').textContent = '';
+};
+document.getElementById('login-cancel').onclick = () => { loginPanel.style.display = 'none'; };
 document.getElementById('login-btn').onclick = attemptLogin;
 document.getElementById('token-input').addEventListener('keydown', e => { if(e.key === 'Enter') attemptLogin(); });
 
@@ -263,27 +282,18 @@ async function attemptLogin(){
   token = val;
   try{
     const res = await api(`/contents/${GH.path}?ref=${GH.branch}`);
-    if(!res.ok) throw new Error('Invalid token or no access (' + res.status + ').');
+    if(!res.ok) throw new Error('Could not verify token (' + res.status + '). Check the token and repo permissions.');
     const json = await res.json();
     sha = json.sha;
-    data = JSON.parse(decodeURIComponent(escape(atob(json.content))));
-    COLS.forEach(c => { if(!Array.isArray(data[c])) data[c] = []; });
-    data.todo.forEach(normalizeTask); data.inprogress.forEach(normalizeTask); data.done.forEach(normalizeTask);
-    document.getElementById('login-screen').style.display = 'none';
-    setStatus('Loaded');
-    renderAll();
+    document.getElementById('login-toggle').textContent = 'Logged in ✓';
+    document.getElementById('login-toggle').disabled = true;
+    loginPanel.style.display = 'none';
+    setStatus('Logged in');
   }catch(e){
     token = null;
     errEl.textContent = e.message;
   }
 }
-function normalizeTask(t){ if(!t.priority) t.priority = 'medium'; }
-
-document.getElementById('logout-btn').onclick = () => {
-  token = null; sha = null;
-  document.getElementById('token-input').value = '';
-  document.getElementById('login-screen').style.display = 'flex';
-};
 
 /* ---- Tabs ---- */
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -712,6 +722,8 @@ async function doSave(){
     setStatus('Error: ' + e.message, 'err');
   }
 }
+
+loadTasks();
 </script>
 
 </body>
