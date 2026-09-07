@@ -46,15 +46,6 @@
       "label": "LLC"
     },
     {
-      "id": "51bc166b-9446-41af-8d34-3cefab83cca4",
-      "createdDate": "2026-09-07",
-      "title": "Korean Skincare",
-      "description": "",
-      "dueDate": "2026-09-11",
-      "priority": "low",
-      "label": "Collab"
-    },
-    {
       "id": "e7877050-51c3-4f3e-9475-6ed65335d763",
       "createdDate": "2026-09-07",
       "title": "Business Travel Reel Ads",
@@ -64,6 +55,16 @@
       "label": "AXIS"
     }
   ],
-  "inprogress": [],
+  "inprogress": [
+    {
+      "id": "51bc166b-9446-41af-8d34-3cefab83cca4",
+      "createdDate": "2026-09-07",
+      "title": "Korean Skincare",
+      "description": "",
+      "dueDate": "2026-09-11",
+      "priority": "low",
+      "label": "Collab"
+    }
+  ],
   "done": []
 }
