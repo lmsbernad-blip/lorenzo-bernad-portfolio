@@ -571,7 +571,7 @@ function openEditModal(id, col){
 function closeModal(){ backdrop.style.display = 'none'; }
 
 document.getElementById('modal-cancel').onclick = closeModal;
-backdrop.addEventListener('click', e => { if(e.target === backdrop) closeModal(); });
+/* Clicking outside the modal intentionally does nothing — avoids losing in-progress input. Use Cancel or Save. */
 
 document.getElementById('modal-save').onclick = () => {
   const title = document.getElementById('f-title').value.trim();
