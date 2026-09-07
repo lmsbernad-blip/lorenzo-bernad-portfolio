@@ -7,20 +7,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#f4f5f7; --card:#ffffff; --border:#dfe1e6; --text:#172b4d; --muted:#6b778c;
-    --accent:#0052cc; --accent-dark:#0747a6; --danger:#de350b; --ok:#00875a; --warn:#ffab00;
+    --board-bg-1:#0079bf; --board-bg-2:#026aa7;
+    --card:#ffffff; --border:#dfe1e6; --text:#172b4d; --muted:#6b778c;
+    --accent:#0079bf; --accent-dark:#026aa7; --danger:#eb5a46; --ok:#61bd4f; --warn:#ff9f1a;
     --col-head:#ebecf0;
-    --pri-high:#de350b; --pri-medium:#ffab00; --pri-low:#36b37e;
+    --pri-high:#eb5a46; --pri-medium:#ff9f1a; --pri-low:#61bd4f;
   }
   *{box-sizing:border-box;}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);
+    background:linear-gradient(160deg,var(--board-bg-1),var(--board-bg-2)) fixed;min-height:100vh;}
 
   /* ---- Login panel (only needed to save, not to view) ---- */
   #login-panel{display:none;padding:10px 18px;background:#fffae6;border-bottom:1px solid #ffe380;gap:8px;align-items:center;flex-wrap:wrap;}
   #login-panel input{padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:13px;min-width:220px;flex:1;}
   #login-err{color:var(--danger);font-size:12px;width:100%;}
 
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:10px;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
   header h1{font-size:18px;margin:0;}
   #tabs{display:flex;gap:4px;background:var(--col-head);border-radius:7px;padding:3px;}
   .tab-btn{background:none;border:none;padding:6px 14px;font-size:13px;border-radius:5px;color:var(--muted);font-weight:500;}
@@ -29,8 +31,8 @@
   #save-status.ok{color:var(--ok);}
   #save-status.err{color:var(--danger);}
   button{cursor:pointer;font-family:inherit;}
-  .btn{background:var(--accent);color:#fff;border:none;border-radius:5px;padding:7px 12px;font-size:13px;}
-  .btn:hover{opacity:.9;}
+  .btn{background:var(--accent);color:#fff;border:none;border-radius:3px;padding:7px 12px;font-size:13px;font-weight:600;}
+  .btn:hover{background:var(--accent-dark);}
   .btn-text{background:none;border:none;color:var(--muted);font-size:12px;text-decoration:underline;padding:0;}
 
   main{padding:16px;}
@@ -39,69 +41,69 @@
 
   /* ---- Board view ---- */
   .board-layout{display:flex;gap:16px;align-items:flex-start;}
-  #board{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;flex:1;min-width:0;}
-  .column{background:var(--col-head);border-radius:8px;flex:0 0 290px;scroll-snap-align:start;display:flex;flex-direction:column;max-height:calc(100vh - 130px);}
-  .column-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 4px;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
-  .count{background:#dfe1e6;border-radius:10px;padding:1px 8px;font-size:12px;}
-  .card-list{flex:1;overflow-y:auto;padding:4px 10px 10px;min-height:40px;}
-  .card{background:var(--card);border-radius:6px;padding:10px 10px 8px;margin-bottom:8px;box-shadow:0 1px 2px rgba(9,30,66,.15);touch-action:none;position:relative;border-left:4px solid var(--pri-medium);}
-  .card[data-priority="high"]{border-left-color:var(--pri-high);}
-  .card[data-priority="low"]{border-left-color:var(--pri-low);}
+  #board{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;flex:1;min-width:0;}
+  .column{background:var(--col-head);border-radius:12px;flex:0 0 272px;scroll-snap-align:start;display:flex;flex-direction:column;max-height:calc(100vh - 130px);}
+  .column-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 6px;font-weight:600;font-size:14px;color:var(--text);}
+  .count{background:rgba(9,30,66,.13);border-radius:10px;padding:1px 8px;font-size:12px;color:var(--muted);}
+  .card-list{flex:1;overflow-y:auto;padding:2px 8px 8px;min-height:40px;}
+  .card{background:var(--card);border-radius:8px;padding:8px 8px 6px;margin-bottom:8px;box-shadow:0 1px 2px rgba(9,30,66,.25);touch-action:none;position:relative;transition:box-shadow .1s;}
+  .card:hover{box-shadow:0 2px 6px rgba(9,30,66,.35);}
   .card.dragging{opacity:.4;}
-  .card-title{font-size:14px;font-weight:600;margin:0 0 4px;word-break:break-word;padding-right:44px;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+  .pill{display:inline-block;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:700;color:#fff;line-height:1.5;}
+  .card-title{font-size:14px;font-weight:500;margin:0 0 4px;word-break:break-word;padding-right:44px;}
   .card-desc{font-size:12.5px;color:var(--muted);margin:0 0 6px;white-space:pre-wrap;word-break:break-word;}
   .card-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11px;color:var(--muted);}
-  .chip{border-radius:10px;padding:2px 8px;font-size:11px;background:#deebff;color:#0747a6;}
-  .due{border-radius:10px;padding:2px 8px;font-size:11px;background:#e3fcef;color:#006644;}
-  .due.overdue{background:#ffebe6;color:#bf2600;}
+  .due{border-radius:4px;padding:2px 6px;font-size:11px;background:#e3fcef;color:#006644;font-weight:600;}
+  .due.overdue{background:#eb5a46;color:#fff;}
   .card-actions{position:absolute;top:6px;right:6px;display:flex;gap:4px;opacity:0;transition:opacity .15s;}
   .card:hover .card-actions, .card:focus-within .card-actions{opacity:1;}
   .icon-btn{background:none;border:none;color:var(--muted);font-size:13px;padding:2px 4px;border-radius:3px;}
   .icon-btn:hover{background:#ebecf0;color:var(--text);}
-  .add-task-btn{margin:4px 10px 10px;background:none;border:none;text-align:left;color:var(--muted);font-size:13px;padding:8px;border-radius:5px;}
-  .add-task-btn:hover{background:#e6e8ec;color:var(--text);}
-  .drop-ghost{border:2px dashed var(--accent);border-radius:6px;height:44px;margin-bottom:8px;background:rgba(0,82,204,.06);}
+  .add-task-btn{margin:2px 8px 8px;background:none;border:none;text-align:left;color:var(--muted);font-size:13px;padding:8px;border-radius:8px;}
+  .add-task-btn:hover{background:rgba(9,30,66,.08);color:var(--text);}
+  .drop-ghost{border:2px dashed var(--accent);border-radius:8px;height:44px;margin-bottom:8px;background:rgba(0,121,191,.08);}
 
   /* ---- Priority sidebar ---- */
-  #priority-panel{flex:0 0 250px;background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);max-height:calc(100vh - 130px);overflow-y:auto;}
+  #priority-panel{flex:0 0 250px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.25);max-height:calc(100vh - 130px);overflow-y:auto;}
   #priority-panel h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
   .pri-group{margin-bottom:14px;}
   .pri-group-label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;margin-bottom:6px;}
   .pri-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
-  .pri-item{font-size:12.5px;padding:5px 6px;border-radius:4px;margin-bottom:3px;background:var(--bg);cursor:pointer;}
-  .pri-item:hover{background:#e6e8ec;}
+  .pri-item{font-size:12.5px;padding:5px 6px;border-radius:4px;margin-bottom:3px;background:var(--col-head);cursor:pointer;}
+  .pri-item:hover{background:#dfe1e6;}
   .pri-item .pri-item-due{color:var(--muted);font-size:11px;}
   .pri-empty{font-size:12px;color:var(--muted);font-style:italic;}
 
   /* ---- Dashboard view ---- */
   #dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
-  .chart-card{background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);}
+  .chart-card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.25);}
   .chart-card h3{margin:0 0 10px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
   .chart-card .chart-wrap{position:relative;height:220px;}
   #eda-empty{color:var(--muted);font-size:13px;}
 
   /* ---- Calendar view ---- */
   #calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-  #calendar-header h2{font-size:15px;margin:0;}
-  .cal-nav-btn{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:5px 10px;font-size:13px;}
+  #calendar-header h2{font-size:15px;margin:0;color:#fff;}
+  .cal-nav-btn{background:var(--card);border:none;border-radius:3px;padding:5px 10px;font-size:13px;font-weight:600;}
   #calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
-  .cal-dow{font-size:11px;color:var(--muted);text-align:center;padding-bottom:4px;text-transform:uppercase;}
-  .cal-day{background:var(--card);border-radius:6px;min-height:64px;padding:6px;font-size:12px;position:relative;cursor:pointer;border:1px solid var(--border);}
-  .cal-day.empty{background:transparent;border:none;cursor:default;}
-  .cal-day.today{border-color:var(--accent);}
+  .cal-dow{font-size:11px;color:#fff;text-align:center;padding-bottom:4px;text-transform:uppercase;font-weight:600;}
+  .cal-day{background:var(--card);border-radius:8px;min-height:64px;padding:6px;font-size:12px;position:relative;cursor:pointer;border:none;box-shadow:0 1px 2px rgba(9,30,66,.25);}
+  .cal-day.empty{background:transparent;box-shadow:none;cursor:default;}
+  .cal-day.today{box-shadow:0 0 0 2px var(--accent);}
   .cal-day .cal-daynum{font-weight:600;}
   .cal-day.free{background:#fff;}
   .cal-day.light{background:#e3fcef;}
-  .cal-day.medium{background:#fffae6;}
-  .cal-day.busy{background:#ffebe6;}
+  .cal-day.medium{background:#fff4d6;}
+  .cal-day.busy{background:#ffe0db;}
   .cal-badge{position:absolute;bottom:4px;right:6px;font-size:11px;font-weight:600;color:var(--muted);}
-  #calendar-daylist{margin-top:16px;background:var(--card);border-radius:8px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.1);}
+  #calendar-daylist{margin-top:16px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 1px 2px rgba(9,30,66,.25);}
   #calendar-daylist h3{margin:0 0 8px;font-size:13px;}
   #calendar-daylist .cd-item{font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--border);}
   #calendar-daylist .cd-item:last-child{border-bottom:none;}
 
   /* ---- Modal ---- */
-  #modal-backdrop{display:none;position:fixed;inset:0;background:rgba(9,30,66,.5);align-items:center;justify-content:center;z-index:50;padding:16px;}
+  #modal-backdrop{display:none;position:fixed;inset:0;background:rgba(9,30,66,.54);align-items:center;justify-content:center;z-index:50;padding:16px;}
   #modal{background:#fff;border-radius:8px;padding:20px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;}
   #modal h2{margin:0 0 14px;font-size:16px;}
   #modal label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px;}
@@ -225,7 +227,7 @@ let sha = null;
 let data = { todo: [], inprogress: [], done: [] };
 const COLS = ['todo', 'inprogress', 'done'];
 const COL_LABELS = { todo: 'To Do', inprogress: 'In Progress', done: 'Done' };
-const PRI_COLORS = { high: '#de350b', medium: '#ffab00', low: '#36b37e' };
+const PRI_COLORS = { high: '#eb5a46', medium: '#ff9f1a', low: '#61bd4f' };
 const PRI_ORDER = { high: 0, medium: 1, low: 2 };
 
 const statusEl = document.getElementById('save-status');
@@ -359,6 +361,16 @@ function render(){
   });
 }
 
+const LABEL_PALETTE = ['#61bd4f','#f2d600','#ff9f1a','#eb5a46','#c377e0','#0079bf','#00c2e0','#51e898','#ff78cb','#344563'];
+function labelColor(str){
+  let h = 0;
+  for(let i=0;i<str.length;i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  return LABEL_PALETTE[h % LABEL_PALETTE.length];
+}
+function pillTextColor(bg){
+  return bg === '#f2d600' ? '#172b4d' : '#fff'; // yellow needs dark text for contrast
+}
+
 function renderCard(task, col){
   const el = document.createElement('div');
   el.className = 'card';
@@ -367,16 +379,19 @@ function renderCard(task, col){
   el.dataset.priority = task.priority || 'medium';
 
   const due = task.dueDate ? `<span class="due${isOverdue(task.dueDate) ? ' overdue' : ''}">${fmtDate(task.dueDate)}</span>` : '';
-  const label = task.label ? `<span class="chip">${escapeHtml(task.label)}</span>` : '';
+  const priColor = PRI_COLORS[task.priority || 'medium'];
+  const priPill = `<span class="pill" style="background:${priColor};color:${pillTextColor(priColor)}">${(task.priority || 'medium').toUpperCase()}</span>`;
+  const labelPill = task.label ? (() => { const c = labelColor(task.label); return `<span class="pill" style="background:${c};color:${pillTextColor(c)}">${escapeHtml(task.label)}</span>`; })() : '';
 
   el.innerHTML = `
     <div class="card-actions">
       <button class="icon-btn" data-edit="${task.id}" title="Edit">✎</button>
       <button class="icon-btn" data-delete="${task.id}" title="Delete">🗑</button>
     </div>
+    <div class="pill-row">${priPill}${labelPill}</div>
     <p class="card-title">${escapeHtml(task.title)}</p>
     ${task.description ? `<p class="card-desc">${escapeHtml(task.description)}</p>` : ''}
-    <div class="card-meta">${label}${due}<span>${task.createdDate || ''}</span></div>
+    <div class="card-meta">${due}<span>${task.createdDate || ''}</span></div>
   `;
   attachDrag(el);
   return el;
@@ -421,7 +436,7 @@ function renderDashboard(){
     type: 'bar',
     data: {
       labels: ['To Do', 'In Progress', 'Done'],
-      datasets: [{ data: COLS.map(c => data[c].length), backgroundColor: ['#0052cc','#ffab00','#36b37e'] }]
+      datasets: [{ data: COLS.map(c => data[c].length), backgroundColor: ['#0079bf','#ff9f1a','#61bd4f'] }]
     },
     options: baseChartOpts(false)
   });
@@ -446,7 +461,7 @@ function renderDashboard(){
     type: 'bar',
     data: {
       labels: labelEntries.map(e => e[0]),
-      datasets: [{ data: labelEntries.map(e => e[1]), backgroundColor: '#0052cc' }]
+      datasets: [{ data: labelEntries.map(e => e[1]), backgroundColor: '#0079bf' }]
     },
     options: { ...baseChartOpts(false), indexAxis: 'y' }
   });
@@ -466,7 +481,7 @@ function renderDashboard(){
     type: 'doughnut',
     data: {
       labels: ['Overdue','Due within 7 days','Later','No due date'],
-      datasets: [{ data: [overdue, soon, later, none], backgroundColor: ['#de350b','#ffab00','#0052cc','#dfe1e6'] }]
+      datasets: [{ data: [overdue, soon, later, none], backgroundColor: ['#eb5a46','#ff9f1a','#0079bf','#dfe1e6'] }]
     },
     options: baseChartOpts(true)
   });
