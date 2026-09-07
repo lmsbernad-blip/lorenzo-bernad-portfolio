@@ -1,15 +1,6 @@
 {
   "todo": [
     {
-      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
-      "title": "Create a Debt Tracker for my loans/credit cards",
-      "description": "",
-      "dueDate": "2026-09-06",
-      "priority": "high",
-      "label": "Personal",
-      "createdDate": "2026-09-06"
-    },
-    {
       "id": "3bb4e7c0-1cc8-4c2a-a098-873550372e5a",
       "title": "Meeting with Business Owners (CBPSI)",
       "description": "",
@@ -91,7 +82,17 @@
       "createdDate": "2026-09-06"
     }
   ],
-  "inprogress": [],
+  "inprogress": [
+    {
+      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
+      "title": "Create a Debt Tracker for my loans/credit cards",
+      "description": "",
+      "dueDate": "2026-09-06",
+      "priority": "high",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    }
+  ],
   "done": [
     {
       "id": "dc2af20b-513a-40ba-88e8-63ccc52d3747",
