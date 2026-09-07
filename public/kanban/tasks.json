@@ -1,21 +1,21 @@
 {
   "todo": [
     {
+      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
+      "title": "Create a Debt Tracker for my loans/credit cards",
+      "description": "",
+      "dueDate": "2026-09-06",
+      "priority": "high",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
       "id": "3bb4e7c0-1cc8-4c2a-a098-873550372e5a",
       "title": "Meeting with Business Owners (CBPSI)",
       "description": "",
       "dueDate": "2026-09-10",
       "priority": "high",
       "label": "Infoseer Assessment",
-      "createdDate": "2026-09-06"
-    },
-    {
-      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
-      "title": "Create a personal project using SQL for Portfolio",
-      "description": "Use this for portfolio under Resume website",
-      "dueDate": "2026-09-11",
-      "priority": "medium",
-      "label": "Portfolio",
       "createdDate": "2026-09-06"
     },
     {
@@ -84,12 +84,12 @@
   ],
   "inprogress": [
     {
-      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
-      "title": "Create a Debt Tracker for my loans/credit cards",
-      "description": "",
-      "dueDate": "2026-09-06",
-      "priority": "high",
-      "label": "Personal",
+      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
+      "title": "Create a personal project using SQL for Portfolio",
+      "description": "Use this for portfolio under Resume website",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
       "createdDate": "2026-09-06"
     }
   ],
