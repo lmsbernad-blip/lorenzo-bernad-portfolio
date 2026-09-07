@@ -8,6 +8,15 @@
       "dueDate": "",
       "priority": "medium",
       "label": ""
+    },
+    {
+      "id": "4671dbba-24e3-4e17-a47d-c389995cc103",
+      "createdDate": "2026-09-07",
+      "title": "LLC - Park Stripping",
+      "description": "Sept 18 - Bid date",
+      "dueDate": "2026-09-16",
+      "priority": "high",
+      "label": ""
     }
   ],
   "inprogress": [],
