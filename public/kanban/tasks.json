@@ -46,6 +46,15 @@
       "createdDate": "2026-09-06"
     },
     {
+      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
+      "title": "Create a personal project using SQL for Portfolio",
+      "description": "Use this for portfolio under Resume website",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
+      "createdDate": "2026-09-06"
+    },
+    {
       "id": "321f0d4f-385d-45e1-9ba9-812fda09666b",
       "title": "Create materials for Seminar (Mindoro)",
       "description": "",
@@ -91,15 +100,6 @@
       "dueDate": "2026-09-07",
       "priority": "high",
       "label": "Infoseer Assessment",
-      "createdDate": "2026-09-06"
-    },
-    {
-      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
-      "title": "Create a personal project using SQL for Portfolio",
-      "description": "Use this for portfolio under Resume website",
-      "dueDate": "2026-09-11",
-      "priority": "medium",
-      "label": "Portfolio",
       "createdDate": "2026-09-06"
     }
   ]
