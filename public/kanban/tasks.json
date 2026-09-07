@@ -37,15 +37,6 @@
       "createdDate": "2026-09-06"
     },
     {
-      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
-      "title": "Create a personal project using SQL for Portfolio",
-      "description": "Use this for portfolio under Resume website",
-      "dueDate": "2026-09-11",
-      "priority": "medium",
-      "label": "Portfolio",
-      "createdDate": "2026-09-06"
-    },
-    {
       "id": "fcb7f245-7f72-4067-a994-4881adcd9de7",
       "title": "Create Materials for Workshop for Sir Eric (Ilocos)",
       "description": "",
@@ -91,7 +82,17 @@
       "createdDate": "2026-09-06"
     }
   ],
-  "inprogress": [],
+  "inprogress": [
+    {
+      "id": "4b07613a-3386-485a-92c1-42766858e0b0",
+      "title": "Create a personal project using SQL for Portfolio",
+      "description": "Use this for portfolio under Resume website",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Portfolio",
+      "createdDate": "2026-09-06"
+    }
+  ],
   "done": [
     {
       "id": "dc2af20b-513a-40ba-88e8-63ccc52d3747",
