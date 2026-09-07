@@ -53,6 +53,15 @@
       "dueDate": "2026-09-14",
       "priority": "high",
       "label": "LLC"
+    },
+    {
+      "id": "51bc166b-9446-41af-8d34-3cefab83cca4",
+      "createdDate": "2026-09-07",
+      "title": "Korean Skincare",
+      "description": "",
+      "dueDate": "2026-09-11",
+      "priority": "low",
+      "label": "Collab"
     }
   ],
   "inprogress": [],
