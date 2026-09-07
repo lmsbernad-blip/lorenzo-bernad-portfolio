@@ -91,7 +91,8 @@
       "createdDate": "2026-09-06"
     }
   ],
-  "inprogress": [
+  "inprogress": [],
+  "done": [
     {
       "id": "dc2af20b-513a-40ba-88e8-63ccc52d3747",
       "title": "Set a Meeting with Sir Jonathan",
@@ -101,6 +102,5 @@
       "label": "Infoseer Assessment",
       "createdDate": "2026-09-06"
     }
-  ],
-  "done": []
+  ]
 }
