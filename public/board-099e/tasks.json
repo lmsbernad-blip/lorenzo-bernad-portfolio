@@ -62,6 +62,15 @@
       "dueDate": "2026-09-09",
       "priority": "high",
       "label": "Collab"
+    },
+    {
+      "id": "c9f72035-e61b-425c-a7bc-5978ee2e2fe7",
+      "createdDate": "2026-09-07",
+      "title": "AI Intro Training - TESDA",
+      "description": "",
+      "dueDate": "2026-09-08",
+      "priority": "low",
+      "label": "LLC"
     }
   ],
   "inprogress": [
