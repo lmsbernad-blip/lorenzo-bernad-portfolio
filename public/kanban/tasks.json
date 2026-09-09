@@ -62,15 +62,6 @@
       "dueDate": "2026-09-13",
       "priority": "medium",
       "label": "Infoseer"
-    },
-    {
-      "id": "c575d369-98bd-4e0f-a8b8-53e7c196e810",
-      "createdDate": "2026-09-09",
-      "title": "Create powerpoint in Building AI Agents for October 2",
-      "description": "",
-      "dueDate": "2026-09-11",
-      "priority": "medium",
-      "label": "Infoseer"
     }
   ],
   "inprogress": [
@@ -91,6 +82,15 @@
       "priority": "medium",
       "label": "Workshop/Seminar",
       "createdDate": "2026-09-06"
+    },
+    {
+      "id": "c575d369-98bd-4e0f-a8b8-53e7c196e810",
+      "createdDate": "2026-09-09",
+      "title": "Create powerpoint in Building AI Agents for October 2",
+      "description": "",
+      "dueDate": "2026-09-11",
+      "priority": "medium",
+      "label": "Infoseer"
     }
   ],
   "done": [
