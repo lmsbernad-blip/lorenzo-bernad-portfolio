@@ -1,15 +1,6 @@
 {
   "todo": [
     {
-      "id": "3bb4e7c0-1cc8-4c2a-a098-873550372e5a",
-      "title": "Meeting with Business Owners (CBPSI)",
-      "description": "",
-      "dueDate": "2026-09-10",
-      "priority": "high",
-      "label": "Infoseer Assessment",
-      "createdDate": "2026-09-06"
-    },
-    {
       "id": "a64c8546-42e3-435d-8db2-fe0a58d6e3e1",
       "title": "Create a personal project using PowerBI for Portfolio",
       "description": "",
@@ -109,6 +100,15 @@
       "dueDate": "2026-09-06",
       "priority": "high",
       "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "3bb4e7c0-1cc8-4c2a-a098-873550372e5a",
+      "title": "Meeting with Business Owners (CBPSI)",
+      "description": "",
+      "dueDate": "2026-09-10",
+      "priority": "high",
+      "label": "Infoseer Assessment",
       "createdDate": "2026-09-06"
     }
   ]
