@@ -28,15 +28,6 @@
       "createdDate": "2026-09-06"
     },
     {
-      "id": "321f0d4f-385d-45e1-9ba9-812fda09666b",
-      "title": "Create materials for Seminar (Mindoro)",
-      "description": "",
-      "dueDate": "2026-11-16",
-      "priority": "medium",
-      "label": "Workshop/Seminar",
-      "createdDate": "2026-09-06"
-    },
-    {
       "id": "2dc7db65-9b4c-4827-a00e-8458a14d48eb",
       "title": "Check travel agency in Megamall",
       "description": "",
@@ -79,6 +70,15 @@
       "title": "Create Materials for Workshop for Sir Eric (Ilocos)",
       "description": "Still waiting for approval from Sir. Eric",
       "dueDate": "2026-10-05",
+      "priority": "medium",
+      "label": "Workshop/Seminar",
+      "createdDate": "2026-09-06"
+    },
+    {
+      "id": "321f0d4f-385d-45e1-9ba9-812fda09666b",
+      "title": "Create materials for Seminar (Mindoro)",
+      "description": "",
+      "dueDate": "2026-11-16",
       "priority": "medium",
       "label": "Workshop/Seminar",
       "createdDate": "2026-09-06"
