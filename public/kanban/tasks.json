@@ -110,6 +110,15 @@
       "priority": "high",
       "label": "Infoseer Assessment",
       "createdDate": "2026-09-06"
+    },
+    {
+      "id": "438bbe09-5123-4f7d-8398-05592ec95f17",
+      "createdDate": "2026-09-09",
+      "title": "Sent the proposal to CBPSI",
+      "description": "",
+      "dueDate": "2026-09-08",
+      "priority": "medium",
+      "label": "Infoseer"
     }
   ]
 }
