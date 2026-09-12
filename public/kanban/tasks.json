@@ -71,6 +71,15 @@
       "dueDate": "2026-09-14",
       "priority": "medium",
       "label": "Infoseer"
+    },
+    {
+      "id": "f968ce2e-eefb-4e04-85ff-74aac010de0e",
+      "createdDate": "2026-09-12",
+      "title": "Create portfolio for job application",
+      "description": "",
+      "dueDate": "2026-09-14",
+      "priority": "high",
+      "label": ""
     }
   ],
   "inprogress": [
