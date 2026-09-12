@@ -71,6 +71,15 @@
       "dueDate": "2026-09-14",
       "priority": "high",
       "label": "Personal"
+    },
+    {
+      "id": "721f1115-b3ee-4237-a3ec-b55591402c4e",
+      "createdDate": "2026-09-12",
+      "title": "Create Financial OS for Infoseer",
+      "description": "",
+      "dueDate": "2026-09-13",
+      "priority": "medium",
+      "label": "Infoseer"
     }
   ],
   "inprogress": [
