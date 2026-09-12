@@ -55,15 +55,6 @@
       "createdDate": "2026-09-06"
     },
     {
-      "id": "b80ed157-2105-45fe-8265-aecbccffbfb8",
-      "createdDate": "2026-09-07",
-      "title": "Create Revenue OS for our Consulting Company",
-      "description": "An Operating System that will handle our pre-sales",
-      "dueDate": "2026-09-13",
-      "priority": "medium",
-      "label": "Infoseer"
-    },
-    {
       "id": "8e827a4f-0208-483e-a19a-ee6c8213a651",
       "createdDate": "2026-09-12",
       "title": "Set a meeting with Tito Felix",
@@ -145,6 +136,15 @@
       "title": "Sent the proposal to CBPSI",
       "description": "",
       "dueDate": "2026-09-08",
+      "priority": "medium",
+      "label": "Infoseer"
+    },
+    {
+      "id": "b80ed157-2105-45fe-8265-aecbccffbfb8",
+      "createdDate": "2026-09-07",
+      "title": "Create Revenue OS for our Consulting Company",
+      "description": "An Operating System that will handle our pre-sales",
+      "dueDate": "2026-09-13",
       "priority": "medium",
       "label": "Infoseer"
     }
