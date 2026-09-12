@@ -80,6 +80,15 @@
       "dueDate": "2026-09-13",
       "priority": "medium",
       "label": "Infoseer"
+    },
+    {
+      "id": "20513152-be4c-47dd-8222-166cf9685b62",
+      "createdDate": "2026-09-12",
+      "title": "Study again for Microsoft Azure for re-take of Azure-900 exam",
+      "description": "",
+      "dueDate": "2026-09-20",
+      "priority": "medium",
+      "label": "Upskill"
     }
   ],
   "inprogress": [
