@@ -93,6 +93,15 @@
       "createdDate": "2026-09-06"
     },
     {
+      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
+      "title": "Create a Debt Tracker for my loans/credit cards",
+      "description": "",
+      "dueDate": "2026-09-06",
+      "priority": "high",
+      "label": "Personal",
+      "createdDate": "2026-09-06"
+    },
+    {
       "id": "321f0d4f-385d-45e1-9ba9-812fda09666b",
       "title": "Create materials for Seminar (Mindoro)",
       "description": "Still waiting for message from Wency (Divine World Colleges)",
@@ -119,15 +128,6 @@
       "dueDate": "2026-09-07",
       "priority": "high",
       "label": "Infoseer Assessment",
-      "createdDate": "2026-09-06"
-    },
-    {
-      "id": "c0d0db1e-63f8-4e28-8d8e-5871394feec7",
-      "title": "Create a Debt Tracker for my loans/credit cards",
-      "description": "",
-      "dueDate": "2026-09-06",
-      "priority": "high",
-      "label": "Personal",
       "createdDate": "2026-09-06"
     },
     {
