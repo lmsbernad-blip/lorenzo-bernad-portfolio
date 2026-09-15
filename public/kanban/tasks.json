@@ -127,6 +127,15 @@
       "dueDate": "2026-09-16",
       "priority": "medium",
       "label": "Infoseer"
+    },
+    {
+      "id": "7e3b1ea9-c099-4eb9-afdc-90b20ae61b90",
+      "createdDate": "2026-09-15",
+      "title": "Follow-up Thea for Marketing OS",
+      "description": "",
+      "dueDate": "2026-09-18",
+      "priority": "medium",
+      "label": "Infoseer"
     }
   ],
   "done": [
