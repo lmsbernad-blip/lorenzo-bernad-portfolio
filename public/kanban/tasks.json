@@ -80,6 +80,15 @@
       "dueDate": "2026-09-20",
       "priority": "medium",
       "label": "Upskill"
+    },
+    {
+      "id": "517d7829-f8b2-44a1-a7cd-fdc7ce957c13",
+      "createdDate": "2026-09-15",
+      "title": "Call 20 clients using the Revenue OS",
+      "description": "",
+      "dueDate": "2026-09-18",
+      "priority": "high",
+      "label": "Infoseer"
     }
   ],
   "inprogress": [
