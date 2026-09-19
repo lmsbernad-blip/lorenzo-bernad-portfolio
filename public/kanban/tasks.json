@@ -136,15 +136,6 @@
       "dueDate": "2026-09-18",
       "priority": "medium",
       "label": "Infoseer"
-    },
-    {
-      "id": "b5e8b436-c883-4c6f-881e-6a8462341441",
-      "createdDate": "2026-09-15",
-      "title": "Show Brad the Zcore system",
-      "description": "",
-      "dueDate": "2026-09-16",
-      "priority": "high",
-      "label": "Infoseer"
     }
   ],
   "done": [
@@ -182,6 +173,15 @@
       "description": "",
       "dueDate": "2026-09-08",
       "priority": "medium",
+      "label": "Infoseer"
+    },
+    {
+      "id": "b5e8b436-c883-4c6f-881e-6a8462341441",
+      "createdDate": "2026-09-15",
+      "title": "Show Brad the Zcore system",
+      "description": "",
+      "dueDate": "2026-09-16",
+      "priority": "high",
       "label": "Infoseer"
     },
     {
