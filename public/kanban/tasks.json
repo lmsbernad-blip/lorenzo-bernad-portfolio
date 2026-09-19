@@ -145,6 +145,15 @@
       "dueDate": "2026-09-19",
       "priority": "medium",
       "label": ""
+    },
+    {
+      "id": "7a2c045a-d729-45d9-b638-15d0889bab13",
+      "createdDate": "2026-09-19",
+      "title": "Standardize Infoseer Company Profile & Infograph",
+      "description": "",
+      "dueDate": "2026-09-19",
+      "priority": "high",
+      "label": "Infoseer"
     }
   ],
   "done": [
