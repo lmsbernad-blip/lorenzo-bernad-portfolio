@@ -1,0 +1,6 @@
+# The source price list has competitor comparisons and assumed S&R prices - keep it private.
+# Only the generated data/catalog.json (shop prices) is published.
+enzo_pricelist.xlsx
+~$*.xlsx
+__pycache__/
+node_modules/

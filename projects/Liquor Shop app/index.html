@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sip Twice — Fine Spirits</title>
+  <meta name="description" content="Sip Twice: whisky, gin, vodka and tequila, browsed shelf by shelf. Plus a party planner that builds a bottle list for your budget." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Age gate -->
+  <div id="age-gate" class="overlay" hidden>
+    <div class="age-card">
+      <div class="brand-mark">Sip Twice</div>
+      <h1>Are you of legal drinking age?</h1>
+      <p>You must be 18 or older to enter this site.</p>
+      <div class="row">
+        <button class="btn btn-gold" id="age-yes">Yes, I'm 18+</button>
+        <button class="btn btn-ghost" id="age-no">No, I'm under 18</button>
+      </div>
+      <p id="age-denied" class="denied" hidden>Sorry, you can't enter this site yet.</p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <button class="brand" id="home" aria-label="Sip Twice, all shelves">Sip <span>Twice</span></button>
+    <nav class="tabs" aria-label="Main">
+      <button class="tab on" data-view="shop">Shelves</button>
+      <button class="tab" data-view="planner">Party Planner</button>
+    </nav>
+    <input id="search" class="search" type="search" placeholder="Search bottles…" aria-label="Search bottles" />
+    <button class="cart-btn" id="open-cart" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM5.2 4l.4 2H21l-2 8H7.4l-.3-1.5L4.4 2H1V0h5l.6 2h-.4Z"/></svg>
+      <span id="cart-count" class="badge">0</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- 1. Overview of every shelf -->
+    <section id="overview" class="view" aria-label="All shelves">
+      <div class="intro">
+        <h1>The wall</h1>
+        <p>Pick a shelf to step closer. Hover a bottle for its price; click it for details.</p>
+      </div>
+      <div id="cabinet" class="cabinet"></div>
+    </section>
+
+    <!-- 2. One shelf, zoomed in -->
+    <section id="shelf-view" class="view" hidden aria-live="polite">
+      <div class="shelf-head">
+        <button class="btn btn-ghost back" id="back">← All shelves</button>
+        <div class="shelf-title">
+          <h1 id="shelf-name"></h1>
+          <p id="shelf-blurb"></p>
+        </div>
+        <div class="shelf-nav">
+          <button class="round" id="prev-shelf" aria-label="Previous shelf">‹</button>
+          <button class="round" id="next-shelf" aria-label="Next shelf">›</button>
+        </div>
+      </div>
+      <div class="case"><div id="shelf-grid" class="shelf-grid"></div></div>
+      <p id="empty" class="empty" hidden>No bottles match your search.</p>
+    </section>
+
+    <!-- 3. Party planner -->
+    <section id="planner" class="view" hidden aria-label="Party planner">
+      <div class="intro">
+        <h1>Party Planner</h1>
+        <p>Tell us your budget and your crowd. We'll build bottle lists from what's in stock right now.</p>
+      </div>
+      <div class="planner">
+        <form id="plan-form" class="plan-form">
+          <label class="field">Budget
+            <div class="peso"><span>₱</span><input id="budget" type="number" min="500" step="100" value="10000" required /></div>
+          </label>
+          <div class="quick" id="budget-chips">
+            <button type="button" data-budget="5000">₱5k</button>
+            <button type="button" data-budget="10000">₱10k</button>
+            <button type="button" data-budget="20000">₱20k</button>
+            <button type="button" data-budget="50000">₱50k</button>
+          </div>
+          <label class="field">Number of guests
+            <div class="qty big">
+              <button type="button" id="pax-minus" aria-label="Fewer guests">−</button>
+              <input id="pax" type="number" min="1" max="500" value="15" required />
+              <button type="button" id="pax-plus" aria-label="More guests">+</button>
+            </div>
+          </label>
+          <fieldset class="field">
+            <legend>Type of liquor <small>(none selected = any)</small></legend>
+            <div class="type-chips" id="type-chips"></div>
+          </fieldset>
+          <label class="field">How much will they drink?
+            <select id="pace"></select>
+          </label>
+          <button class="btn btn-gold wide" type="submit">Plan my party</button>
+          <p class="small">Estimate uses a 45 ml pour per drink. Mixers and ice not included.</p>
+        </form>
+        <div id="plans" class="plans">
+          <div class="plans-empty">Your suggestions will appear here.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Sip Twice · Drink responsibly. Sales only to customers 18+; valid ID required on delivery.
+  </footer>
+
+  <div id="tag" class="tag" role="tooltip" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <!-- Bottle details -->
+  <dialog id="product-dialog" class="dialog">
+    <button class="close" data-close aria-label="Close">×</button>
+    <div class="product">
+      <div class="product-art" id="pd-art"></div>
+      <div class="product-info">
+        <p class="eyebrow" id="pd-shelf"></p>
+        <h2 id="pd-name"></h2>
+        <p class="price"><span id="pd-price"></span> <s id="pd-regular"></s> <em id="pd-save" class="save"></em></p>
+        <p id="pd-desc" class="desc"></p>
+        <dl class="specs">
+          <div><dt>Size</dt><dd id="pd-size"></dd></div>
+          <div><dt>Per 45 ml pour</dt><dd id="pd-pour"></dd></div>
+          <div><dt>Availability</dt><dd id="pd-stock"></dd></div>
+        </dl>
+        <div class="buy-row">
+          <div class="qty">
+            <button type="button" id="pd-minus" aria-label="Decrease">−</button>
+            <input id="pd-qty" type="number" min="1" value="1" aria-label="Quantity" />
+            <button type="button" id="pd-plus" aria-label="Increase">+</button>
+          </div>
+          <button class="btn btn-gold" id="pd-add">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Cart drawer -->
+  <div id="drawer-backdrop" class="backdrop" hidden></div>
+  <aside id="drawer" class="drawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Your cart</h2>
+      <button class="close" id="close-cart" aria-label="Close cart">×</button>
+    </div>
+    <ul id="cart-lines" class="cart-lines"></ul>
+    <p id="cart-empty" class="cart-empty">Your cart is empty. Pick something from the shelves, or let the Party Planner choose.</p>
+    <div class="drawer-foot" id="cart-foot">
+      <form id="promo-form" class="promo">
+        <input id="promo" placeholder="Promo code" aria-label="Promo code" />
+        <button class="btn btn-ghost" type="submit">Apply</button>
+      </form>
+      <p id="promo-msg" class="msg"></p>
+      <dl class="totals" id="cart-totals"></dl>
+      <button class="btn btn-gold wide" id="checkout-btn">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- Checkout -->
+  <dialog id="checkout" class="dialog checkout">
+    <button class="close" data-close aria-label="Close">×</button>
+    <ol class="steps" id="steps"><li class="on">Delivery</li><li>Payment</li><li>Done</li></ol>
+
+    <form id="ship-form" class="form" novalidate>
+      <label>Full name<input name="name" autocomplete="name" /></label>
+      <div class="two">
+        <label>Mobile number<input name="mobile" inputmode="tel" placeholder="0917 123 4567" autocomplete="tel" /></label>
+        <label>Email<input name="email" type="email" autocomplete="email" /></label>
+      </div>
+      <label>Delivery address<input name="address" autocomplete="street-address" /></label>
+      <div class="two">
+        <label>City<input name="city" autocomplete="address-level2" /></label>
+        <label>Date of birth<input name="dob" type="date" /></label>
+      </div>
+      <p class="err" data-err></p>
+      <button class="btn btn-gold wide" type="submit">Continue to payment</button>
+    </form>
+
+    <form id="pay-form" class="form" novalidate hidden>
+      <p class="secure">Demo checkout: nothing is charged. Card test number: 4242 4242 4242 4242.</p>
+      <div class="methods" role="radiogroup" aria-label="Payment method">
+        <label><input type="radio" name="method" value="gcash" checked /><span>GCash</span></label>
+        <label><input type="radio" name="method" value="maya" /><span>Maya</span></label>
+        <label><input type="radio" name="method" value="card" /><span>Card</span></label>
+        <label><input type="radio" name="method" value="cod" /><span>Cash on delivery</span></label>
+      </div>
+      <div data-for="wallet">
+        <label>E-wallet mobile number<input name="wallet" inputmode="tel" placeholder="0917 123 4567" /></label>
+      </div>
+      <div data-for="card" hidden>
+        <label>Name on card<input name="cardName" autocomplete="cc-name" /></label>
+        <label>Card number<input name="card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" /></label>
+        <div class="two">
+          <label>Expiry<input name="exp" placeholder="MM/YY" autocomplete="cc-exp" /></label>
+          <label>CVC<input name="cvc" inputmode="numeric" autocomplete="cc-csc" /></label>
+        </div>
+      </div>
+      <p data-for="cod" class="small" hidden>Please prepare the exact amount. Our rider will check your ID.</p>
+      <dl class="totals" id="pay-totals"></dl>
+      <p class="err" data-err></p>
+      <div class="row">
+        <button class="btn btn-ghost" type="button" id="back-ship">Back</button>
+        <button class="btn btn-gold" type="submit" id="pay-btn">Place order</button>
+      </div>
+    </form>
+
+    <div id="done" class="done" hidden>
+      <div class="cheers">🥃</div>
+      <h2>Cheers! Order placed.</h2>
+      <p>Order <strong id="order-no"></strong> is confirmed. We'll text <span id="order-mobile"></span> when the rider is on the way.</p>
+      <p class="small">Valid ID is required on delivery.</p>
+      <button class="btn btn-gold" data-close>Back to the shelves</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
