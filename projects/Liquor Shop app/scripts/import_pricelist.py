@@ -127,6 +127,9 @@ def main() -> None:
     if OUT.exists():
         previous = {p["id"]: p for p in json.loads(OUT.read_text(encoding="utf-8"))["products"]}
 
+    credits_file = IMAGES / "CREDITS.json"
+    credits = json.loads(credits_file.read_text(encoding="utf-8")) if credits_file.exists() else {}
+
     merged: dict[str, dict] = {}
     for r in rows[1:]:
         if not r or not r[i_name] or r[i_price] in (None, ""):
@@ -161,7 +164,10 @@ def main() -> None:
             "sizeAssumed": e["ml"] is None,
             "stock": e["stock"] if e["stock"] is not None else prev.get("stock", DEFAULT_STOCK),
             "description": e["desc"] or prev.get("description"),
-            "image": find_image(pid),
+            "image": (img := find_image(pid)),
+            # Openly licensed photos must be credited; scripts/fetch_images.py records the source.
+            "photoCredit": ({k: credits[pid].get(k) for k in ("source", "license", "page")}
+                            if img and pid in credits else None),
         })
 
     order = {s["id"]: i for i, s in enumerate(SHELVES)}

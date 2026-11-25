@@ -92,7 +92,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/aberlour-10.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Aberlour_single_malt_10_years_old.jpg"
+   }
   },
   {
    "id": "aberlour-12-double-cask",
@@ -104,7 +109,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "aberlour-12-ncf",
@@ -116,7 +122,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "aberlour-14-double-cask",
@@ -128,7 +135,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "balvenie-12-doublewood",
@@ -140,7 +148,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/balvenie-12-doublewood.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Balvenie_Whisky_Doublewood_12_years_old.jpg"
+   }
   },
   {
    "id": "balvenie-14-caribbean",
@@ -152,7 +165,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "benriach-10-the-original",
@@ -164,7 +178,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "benriach-12",
@@ -176,7 +191,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/benriach-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ruou_whisky_benriach_12.jpg"
+   }
   },
   {
    "id": "glenallachie-12",
@@ -188,7 +208,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfarclas-10-sherry",
@@ -200,7 +221,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfarclas-15",
@@ -212,7 +234,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/glenfarclas-15.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5018066154617"
+   }
   },
   {
    "id": "glenfiddich-12",
@@ -224,7 +251,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/glenfiddich-12.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5010327000176"
+   }
   },
   {
    "id": "glenfiddich-15",
@@ -236,7 +268,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/glenfiddich-15.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5010327325125"
+   }
   },
   {
    "id": "glenfiddich-18",
@@ -248,7 +285,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-21",
@@ -260,7 +298,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-22-gran-cortes",
@@ -272,7 +311,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-23-grand-cru",
@@ -284,7 +324,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-ipa",
@@ -296,7 +337,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glengrant-12",
@@ -308,7 +350,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glengrant-18",
@@ -320,7 +363,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenlivet-12",
@@ -332,7 +376,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/glenlivet-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY 2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:The_Glenlivet_12.jpg"
+   }
   },
   {
    "id": "glenlivet-18",
@@ -344,7 +393,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenlivet-21",
@@ -356,7 +406,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-12-double-cask",
@@ -368,7 +419,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-12-sherry-cask",
@@ -380,7 +432,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-12-triple-cask",
@@ -392,7 +445,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-15-double-cask",
@@ -404,7 +458,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-18-double-cask",
@@ -416,7 +471,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-18-sherry-cask",
@@ -428,7 +484,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "macallan-a-night-on-earth",
@@ -440,7 +497,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "aberfeldy-12",
@@ -452,7 +510,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "aberfeldy-16",
@@ -464,7 +523,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "aberfeldy-21",
@@ -476,7 +536,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "auchentoshan-12",
@@ -488,7 +549,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/auchentoshan-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Auchentoshan_12.jpg"
+   }
   },
   {
    "id": "auchentoshan-21",
@@ -500,7 +566,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "auchentoshan-three-wood",
@@ -512,7 +579,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "bladnoch-vinaya",
@@ -524,7 +592,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "dalmore-12",
@@ -536,7 +605,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/dalmore-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dalmore_12yo.jpg"
+   }
   },
   {
    "id": "dalmore-15",
@@ -548,7 +622,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "deanston-12-sherry",
@@ -560,7 +635,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glendronach-12-sherry",
@@ -572,7 +648,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glendronach-15",
@@ -584,7 +661,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glengoyne-12",
@@ -596,7 +674,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenmorangie-10",
@@ -608,7 +687,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/glenmorangie-10.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Glenmorangie_10.jpg"
+   }
   },
   {
    "id": "glenmorangie-12-lasanta",
@@ -620,7 +704,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenmorangie-14",
@@ -632,7 +717,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenmorangie-18-extremely-rare",
@@ -644,7 +730,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "ardbeg-10",
@@ -656,7 +743,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/ardbeg-10.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ardbeg_10_Jahre_Flasche.jpg"
+   }
   },
   {
    "id": "ardbeg-5-wee-beastie",
@@ -668,7 +760,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "ardbeg-an-oa",
@@ -680,7 +773,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/ardbeg-an-oa.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Ardbeg_An_Oa.jpg"
+   }
   },
   {
    "id": "arran-10",
@@ -692,7 +790,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "arran-18",
@@ -704,7 +803,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "bowmore-12",
@@ -716,7 +816,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/bowmore-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bowmore_12_years_old_Scotch_whisky.jpg"
+   }
   },
   {
    "id": "caol-ila-12",
@@ -728,7 +833,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/caol-ila-12.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Caol_Ila_12_years_old_whisky.jpg"
+   }
   },
   {
    "id": "jura-12",
@@ -740,7 +850,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "jura-15-sherry-cask",
@@ -752,7 +863,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "lagavulin-16",
@@ -764,7 +876,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/lagavulin-16.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC0",
+    "page": "https://commons.wikimedia.org/wiki/File:Lagavulin_Single_Malt_Scotch_Whisky_Aged_16_Years.jpg"
+   }
   },
   {
    "id": "lagavulin-8",
@@ -776,7 +893,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/lagavulin-8.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5000281050546"
+   }
   },
   {
    "id": "laphroaig-10",
@@ -788,7 +910,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/laphroaig-10.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Laphroaig_10.jpg"
+   }
   },
   {
    "id": "ballantine-s-12",
@@ -800,7 +927,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "chivas-12",
@@ -812,7 +940,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/chivas-12.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/0080432400432"
+   }
   },
   {
    "id": "chivas-18",
@@ -824,7 +957,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "johnnie-walker-black",
@@ -836,7 +970,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/johnnie-walker-black.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Black_Label.jpg"
+   }
   },
   {
    "id": "johnnie-walker-blue-label",
@@ -848,7 +987,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "johnnie-walker-double-black",
@@ -860,7 +1000,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/johnnie-walker-double-black.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Double_Black_Johnnie_Walker.jpg"
+   }
   },
   {
    "id": "johnnie-walker-gold-label",
@@ -872,7 +1017,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/johnnie-walker-gold-label.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Gold_Label_Reserve.jpg"
+   }
   },
   {
    "id": "monkey-shoulder",
@@ -884,7 +1034,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/monkey-shoulder.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Monkey_Shoulder_scotch_bottle.jpg"
+   }
   },
   {
    "id": "hibiki-harmony",
@@ -896,7 +1051,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "kakubin-yellow-label",
@@ -908,7 +1064,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "kavalan-distillery-select-no-1",
@@ -920,7 +1077,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "nikka-black-clear",
@@ -932,7 +1090,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "suntory-hakushu",
@@ -944,7 +1103,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "yamazaki-single-malt",
@@ -956,7 +1116,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "bulleit-bourbon",
@@ -968,7 +1129,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "jack-daniel-s-no-7",
@@ -980,7 +1142,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/jack-daniel-s-no-7.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/3099873045369"
+   }
   },
   {
    "id": "jim-beam",
@@ -992,7 +1159,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "woodford-reserve",
@@ -1004,7 +1172,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/woodford-reserve.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png"
+   }
   },
   {
    "id": "jameson-whisky",
@@ -1016,7 +1189,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "tullamore-dew-irish-whiskey",
@@ -1028,7 +1202,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/tullamore-dew-irish-whiskey.webp",
+   "photoCredit": {
+    "source": "Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Tullamore_Dew_Whiskey.jpg"
+   }
   },
   {
    "id": "beefeater-london-dry",
@@ -1040,7 +1219,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "bombay-sapphire",
@@ -1052,7 +1232,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/bombay-sapphire.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5010677710596"
+   }
   },
   {
    "id": "hendricks",
@@ -1064,7 +1249,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/hendricks.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/0083664990436"
+   }
   },
   {
    "id": "suntory-roku-gin",
@@ -1076,7 +1266,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "tanqueray-london-gin",
@@ -1088,7 +1279,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/tanqueray-london-gin.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5000281015248"
+   }
   },
   {
    "id": "tanqueray-sevilla",
@@ -1100,7 +1296,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "absolut-vodka",
@@ -1112,7 +1309,12 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/absolut-vodka.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/7312040017355"
+   }
   },
   {
    "id": "belvedere",
@@ -1124,7 +1326,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "grey-goose",
@@ -1136,7 +1339,12 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": "images/grey-goose.webp",
+   "photoCredit": {
+    "source": "Open Food Facts",
+    "license": "CC BY-SA 3.0",
+    "page": "https://world.openfoodfacts.org/product/5010677850100"
+   }
   },
   {
    "id": "1800-reposado",
@@ -1148,7 +1356,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "1800-silver-blanco",
@@ -1160,7 +1369,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "don-julio-blanco",
@@ -1172,7 +1382,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": null
+   "image": null,
+   "photoCredit": null
   }
  ]
 }

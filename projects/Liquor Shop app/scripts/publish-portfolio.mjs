@@ -16,5 +16,5 @@ mkdirSync(target, { recursive: true });
 for (const item of ['index.html', 'favicon.svg', 'css', 'js', 'data', 'images']) {
   if (existsSync(resolve(app, item))) cpSync(resolve(app, item), resolve(target, item), { recursive: true });
 }
-rmSync(resolve(target, 'images/EXPECTED.txt'), { force: true });
+for (const f of ['EXPECTED.txt', 'REJECTED.txt', 'CREDITS.json']) rmSync(resolve(target, 'images', f), { force: true });
 console.log(`Shop copied to ${target}`);

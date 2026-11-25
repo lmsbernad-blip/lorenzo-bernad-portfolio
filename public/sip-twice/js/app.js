@@ -215,6 +215,10 @@ function openProduct(id) {
   $('#pd-desc').textContent = p.description || SHELF[p.shelf].blurb;
   $('#pd-size').textContent = size(p.volumeMl) + (p.sizeAssumed ? '*' : '');
   $('#pd-pour').textContent = `${money(Math.round((p.price / p.volumeMl) * POUR_ML))} · ${Math.floor(p.volumeMl / POUR_ML)} pours`;
+  const c = p.photoCredit;
+  $('#pd-credit').innerHTML = c
+    ? `Photo: <a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.source)}</a> · ${esc(c.license)}`
+    : p.image ? '' : 'Illustration: actual bottle photo coming soon.';
   $('#pd-stock').textContent = p.stock <= 0 ? 'Sold out' : p.stock <= 3 ? `Only ${p.stock} left` : 'In stock';
   const qty = $('#pd-qty');
   qty.max = Math.max(1, p.stock);
