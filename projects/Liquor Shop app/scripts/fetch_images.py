@@ -153,7 +153,7 @@ def main() -> None:
 
     CREDITS.write_text(json.dumps(credits, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"\n{found} new photos. {len(missing)} without a confident match (they keep the drawn bottle).")
-    print("Next: python scripts/import_pricelist.py")
+    print("Next: python scripts/cutout_bottles.py <new ids>  (bottle-only cut-outs), then python scripts/import_pricelist.py")
 
 
 if __name__ == "__main__":

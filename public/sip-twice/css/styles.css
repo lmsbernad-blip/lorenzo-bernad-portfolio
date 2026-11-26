@@ -247,7 +247,7 @@ main { padding: 0 clamp(16px, 4vw, 40px) 3rem; max-width: 1320px; margin: 0 auto
 .save { font-family: Inter, sans-serif; font-style: normal; font-size: .8rem; background: #b8321f; color: #fff; padding: 2px 8px; border-radius: 999px; }
 .save:empty { display: none; }
 .desc { color: var(--muted); line-height: 1.55; }
-.specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: 1rem 0 1.3rem; }
+.specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; margin: 1rem 0 1.3rem; }
 .specs div { background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 10px; padding: .55rem .7rem; }
 .specs dt { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 .specs dd { margin: .15rem 0 0; font-weight: 600; font-size: .92rem; }

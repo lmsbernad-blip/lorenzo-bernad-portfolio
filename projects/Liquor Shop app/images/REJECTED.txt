@@ -4,3 +4,11 @@ jim-beam
 johnnie-walker-blue-label
 yamazaki-single-malt
 bulleit-bourbon
+bombay-sapphire
+dalmore-12
+glenfarclas-15
+glenfiddich-15
+glenlivet-12
+grey-goose
+hendricks
+woodford-reserve

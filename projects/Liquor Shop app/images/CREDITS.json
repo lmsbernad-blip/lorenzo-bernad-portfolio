@@ -20,13 +20,6 @@
   "license": "CC BY 3.0",
   "source": "Wikimedia Commons"
  },
- "glenfarclas-15": {
-  "url": "https://images.openfoodfacts.org/images/products/501/806/615/4617/front_en.7.400.jpg",
-  "page": "https://world.openfoodfacts.org/product/5018066154617",
-  "title": "Glenfarclas Glenfarclas 15 Year Old",
-  "license": "CC BY-SA 3.0",
-  "source": "Open Food Facts"
- },
  "glenfiddich-12": {
   "url": "https://images.openfoodfacts.org/images/products/501/032/700/0176/front_en.33.400.jpg",
   "page": "https://world.openfoodfacts.org/product/5010327000176",
@@ -34,31 +27,10 @@
   "license": "CC BY-SA 3.0",
   "source": "Open Food Facts"
  },
- "glenfiddich-15": {
-  "url": "https://images.openfoodfacts.org/images/products/501/032/732/5125/front_fr.24.400.jpg",
-  "page": "https://world.openfoodfacts.org/product/5010327325125",
-  "title": "glenfiddich 15",
-  "license": "CC BY-SA 3.0",
-  "source": "Open Food Facts"
- },
- "glenlivet-12": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/The_Glenlivet_12.jpg/500px-The_Glenlivet_12.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:The_Glenlivet_12.jpg",
-  "title": "The Glenlivet 12",
-  "license": "CC BY 2.0",
-  "source": "Wikimedia Commons"
- },
  "auchentoshan-12": {
   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Auchentoshan_12.jpg/500px-Auchentoshan_12.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
   "page": "https://commons.wikimedia.org/wiki/File:Auchentoshan_12.jpg",
   "title": "Auchentoshan 12",
-  "license": "CC BY-SA 4.0",
-  "source": "Wikimedia Commons"
- },
- "dalmore-12": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Dalmore_12yo.jpg/500px-Dalmore_12yo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:Dalmore_12yo.jpg",
-  "title": "Dalmore 12yo",
   "license": "CC BY-SA 4.0",
   "source": "Wikimedia Commons"
  },
@@ -132,20 +104,6 @@
   "license": "CC BY-SA 3.0",
   "source": "Open Food Facts"
  },
- "bombay-sapphire": {
-  "url": "https://images.openfoodfacts.org/images/products/501/067/771/0596/front_en.5.400.jpg",
-  "page": "https://world.openfoodfacts.org/product/5010677710596",
-  "title": "bombay Bombay Sapphire",
-  "license": "CC BY-SA 3.0",
-  "source": "Open Food Facts"
- },
- "hendricks": {
-  "url": "https://images.openfoodfacts.org/images/products/008/366/499/0436/front_en.6.400.jpg",
-  "page": "https://world.openfoodfacts.org/product/0083664990436",
-  "title": "Hendricks",
-  "license": "CC BY-SA 3.0",
-  "source": "Open Food Facts"
- },
  "tanqueray-london-gin": {
   "url": "https://images.openfoodfacts.org/images/products/500/028/101/5248/front_de.35.400.jpg",
   "page": "https://world.openfoodfacts.org/product/5000281015248",
@@ -157,13 +115,6 @@
   "url": "https://images.openfoodfacts.org/images/products/731/204/001/7355/front_en.5.400.jpg",
   "page": "https://world.openfoodfacts.org/product/7312040017355",
   "title": "Absolut Absolut",
-  "license": "CC BY-SA 3.0",
-  "source": "Open Food Facts"
- },
- "grey-goose": {
-  "url": "https://images.openfoodfacts.org/images/products/501/067/785/0100/front_fr.36.400.jpg",
-  "page": "https://world.openfoodfacts.org/product/5010677850100",
-  "title": "GREY GOOSE Vodka",
   "license": "CC BY-SA 3.0",
   "source": "Open Food Facts"
  },
@@ -193,13 +144,6 @@
   "page": "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Black_Label.jpg",
   "title": "Johnnie Walker Black Label",
   "license": "CC BY-SA 3.0",
-  "source": "Wikimedia Commons"
- },
- "woodford-reserve": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Woodford_Reserve_2016.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-  "page": "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png",
-  "title": "Woodford Reserve 2016",
-  "license": "CC BY-SA 4.0",
   "source": "Wikimedia Commons"
  },
  "tullamore-dew-irish-whiskey": {

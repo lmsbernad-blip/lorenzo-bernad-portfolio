@@ -9,6 +9,8 @@ balvenie-14-caribbean
 benriach-10-the-original
 glenallachie-12
 glenfarclas-10-sherry
+glenfarclas-15
+glenfiddich-15
 glenfiddich-18
 glenfiddich-21
 glenfiddich-22-gran-cortes
@@ -16,6 +18,7 @@ glenfiddich-23-grand-cru
 glenfiddich-ipa
 glengrant-12
 glengrant-18
+glenlivet-12
 glenlivet-18
 glenlivet-21
 macallan-12-double-cask
@@ -31,6 +34,7 @@ aberfeldy-21
 auchentoshan-21
 auchentoshan-three-wood
 bladnoch-vinaya
+dalmore-12
 dalmore-15
 deanston-12-sherry
 glendronach-12-sherry
@@ -55,11 +59,15 @@ suntory-hakushu
 yamazaki-single-malt
 bulleit-bourbon
 jim-beam
+woodford-reserve
 jameson-whisky
 beefeater-london-dry
+bombay-sapphire
+hendricks
 suntory-roku-gin
 tanqueray-sevilla
 belvedere
+grey-goose
 1800-reposado
 1800-silver-blanco
 don-julio-blanco

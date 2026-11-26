@@ -214,7 +214,6 @@ function openProduct(id) {
   $('#pd-save').textContent = p.regularPrice ? `Save ${money(p.regularPrice - p.price)}` : '';
   $('#pd-desc').textContent = p.description || SHELF[p.shelf].blurb;
   $('#pd-size').textContent = size(p.volumeMl) + (p.sizeAssumed ? '*' : '');
-  $('#pd-pour').textContent = `${money(Math.round((p.price / p.volumeMl) * POUR_ML))} · ${Math.floor(p.volumeMl / POUR_ML)} pours`;
   const c = p.photoCredit;
   $('#pd-credit').innerHTML = c
     ? `Photo: <a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.source)}</a> · ${esc(c.license)}`

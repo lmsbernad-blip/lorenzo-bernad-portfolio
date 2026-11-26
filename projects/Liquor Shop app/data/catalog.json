@@ -234,12 +234,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": "images/glenfarclas-15.webp",
-   "photoCredit": {
-    "source": "Open Food Facts",
-    "license": "CC BY-SA 3.0",
-    "page": "https://world.openfoodfacts.org/product/5018066154617"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-12",
@@ -268,12 +264,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": "images/glenfiddich-15.webp",
-   "photoCredit": {
-    "source": "Open Food Facts",
-    "license": "CC BY-SA 3.0",
-    "page": "https://world.openfoodfacts.org/product/5010327325125"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenfiddich-18",
@@ -376,12 +368,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": "images/glenlivet-12.webp",
-   "photoCredit": {
-    "source": "Wikimedia Commons",
-    "license": "CC BY 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:The_Glenlivet_12.jpg"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "glenlivet-18",
@@ -605,12 +593,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": "images/dalmore-12.webp",
-   "photoCredit": {
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Dalmore_12yo.jpg"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "dalmore-15",
@@ -1172,12 +1156,8 @@
    "sizeAssumed": false,
    "stock": 6,
    "description": null,
-   "image": "images/woodford-reserve.webp",
-   "photoCredit": {
-    "source": "Wikimedia Commons",
-    "license": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "jameson-whisky",
@@ -1232,12 +1212,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": "images/bombay-sapphire.webp",
-   "photoCredit": {
-    "source": "Open Food Facts",
-    "license": "CC BY-SA 3.0",
-    "page": "https://world.openfoodfacts.org/product/5010677710596"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "hendricks",
@@ -1249,12 +1225,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": "images/hendricks.webp",
-   "photoCredit": {
-    "source": "Open Food Facts",
-    "license": "CC BY-SA 3.0",
-    "page": "https://world.openfoodfacts.org/product/0083664990436"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "suntory-roku-gin",
@@ -1339,12 +1311,8 @@
    "sizeAssumed": true,
    "stock": 6,
    "description": null,
-   "image": "images/grey-goose.webp",
-   "photoCredit": {
-    "source": "Open Food Facts",
-    "license": "CC BY-SA 3.0",
-    "page": "https://world.openfoodfacts.org/product/5010677850100"
-   }
+   "image": null,
+   "photoCredit": null
   },
   {
    "id": "1800-reposado",

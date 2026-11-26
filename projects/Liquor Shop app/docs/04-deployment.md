@@ -3,8 +3,10 @@
 ## Update prices, stock or photos
 1. Edit `enzo_pricelist.xlsx` (sheet "Market Comparison"). To track stock, add a column called **Stock**
    (and optionally **Description**). Until then every bottle has a placeholder stock of 6.
-2. Photos: save one per bottle as `images/<id>.webp` (or .png/.jpg). The ids still missing a photo are
-   listed in `images/EXPECTED.txt`.
+2. Photos: save one per bottle as `images/<id>.webp` (or .png/.jpg); ids still missing are in
+   `images/EXPECTED.txt`. `python scripts/fetch_images.py` looks for openly licensed photos, and
+   `python scripts/cutout_bottles.py <ids>` turns them into bottle-only cut-outs (crop hints in
+   `images/CROPS.json`; unusable ids go in `images/REJECTED.txt`). Shelves show bottles only, so check every cut-out.
 3. Run `npm run import:prices`, then `npm test`.
 
 ## GitHub portfolio (GitHub Pages)
